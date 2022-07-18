@@ -1,13 +1,14 @@
 import FilmCard from '../film-card/film-card';
+import Logo from '../../components/logo/logo';
 
 type MainScreenProps = {
-  filmsCount: number[];
-  filmName: string;
-  filmGenre: string;
-  filmYear: number;
+  filmsCount: number;
+  title: string;
+  genre: string;
+  releaseDate: number;
 }
 
-function MainScreen({filmsCount, filmName, filmGenre, filmYear}: MainScreenProps): JSX.Element {
+function MainScreen({filmsCount, title, genre, releaseDate}: MainScreenProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -19,11 +20,7 @@ function MainScreen({filmsCount, filmName, filmGenre, filmYear}: MainScreenProps
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a href="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            {<Logo/>}
           </div>
 
           <ul className="user-block">
@@ -45,10 +42,10 @@ function MainScreen({filmsCount, filmName, filmGenre, filmYear}: MainScreenProps
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmName}</h2>
+              <h2 className="film-card__title">{title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmGenre}</span>
-                <span className="film-card__year">{filmYear}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{releaseDate}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -109,7 +106,7 @@ function MainScreen({filmsCount, filmName, filmGenre, filmYear}: MainScreenProps
           </ul>
 
           <div className="catalog__films-list">
-            {filmsCount.map((count) => <FilmCard key='count'/>)}
+            {Array.from({ length: filmsCount }, (it, index) => <FilmCard key='index'/>)}
           </div>
 
           <div className="catalog__more">
