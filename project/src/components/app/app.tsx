@@ -9,22 +9,20 @@ import NotFoundScreen from '../../pages/not-found/not-found-screen';
 import Player from '../../pages/player/player';
 import Login from '../../pages/sign-in/login';
 import PrivateRoute from '../private-route/private-route';
+import {FilmInfo, FilmReview} from '../../types/films';
 
 type AppScreenProps = {
-  filmsCount: number;
-  title: string;
-  genre: string;
-  releaseDate: number;
+  filmsInfo: FilmInfo[];
+  film: FilmInfo;
 }
 
-function App(props: AppScreenProps): JSX.Element {
-  const {filmsCount, title, genre, releaseDate} = props;
+function App({filmsInfo, film}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen filmsCount={filmsCount} title={title} genre={genre} releaseDate={releaseDate}/>}
+          element={<MainScreen filmsInfo={filmsInfo} film={film}/>}
         />
         <Route
           path={AppRoute.Login}

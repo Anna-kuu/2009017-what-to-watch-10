@@ -1,11 +1,24 @@
-export default function FilmCard(): JSX.Element {
+
+import {Link} from 'react-router-dom';
+import { FilmInfo } from '../../types/films';
+
+type FilmCardProps = {
+  film: FilmInfo;
+  setActiveCard: React.Dispatch<React.SetStateAction<number | undefined>>;
+}
+
+export default function FilmCard({film, setActiveCard}: FilmCardProps): JSX.Element {
+  const mouseOverHandler = () => {
+    setActiveCard(film.id);
+  };
+
   return (
-    <article className="small-film-card catalog__films-card">
+    <article onMouseOver={mouseOverHandler} className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
-        <img src="img/what-we-do-in-the-shadows.jpg" alt="What We Do in the Shadows" width="280" height="175" />
+        <img src={film.posterImg} alt={film.title} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">What We Do in the Shadows</a>
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.title}</Link>
       </h3>
     </article>
   );
