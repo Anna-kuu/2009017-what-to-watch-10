@@ -1,7 +1,20 @@
-export default function Player(): JSX.Element {
+import {FilmInfo} from '../../types/films';
+import {useParams, Navigate} from 'react-router-dom';
+
+type PlayerProps = {
+  films: FilmInfo[];
+};
+
+export default function Player({films}: PlayerProps): JSX.Element {
+  const params = useParams();
+
+  const currentFilm = films.find((film) => film.id === Number(params.id));
+  if (!currentFilm) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={currentFilm.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
       <button type="button" className="player__exit">Exit</button>
 

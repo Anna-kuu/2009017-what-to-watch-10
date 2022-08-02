@@ -32,23 +32,23 @@ function App({filmsInfo, film}: AppScreenProps): JSX.Element {
           path={AppRoute.Mylist}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <MyList/>
+              <MyList films={filmsInfo}/>
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Film}
-          element={<Film/>}
+          element={<Film films={filmsInfo}/>}
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReview/>}
+          element={<AddReview films={filmsInfo}/>}
         />
         <Route
           path={AppRoute.Player}
-          element={<Player/>}
+          element={<Player films={filmsInfo}/>}
         />
         <Route
           path="*"

@@ -1,11 +1,22 @@
 import Logo from '../../components/logo/logo';
+import {FilmInfo} from '../../types/films';
+import {useParams, Navigate, Link} from 'react-router-dom';
 
-export default function AddReview(): JSX.Element {
+type AddReviewProps = {
+  films: FilmInfo[];
+}
+
+export default function AddReview({films}: AddReviewProps): JSX.Element {
+  const params = useParams();
+  const currentFilm = films.find((film) => film.id === Number(params.id));
+  if (!currentFilm) {
+    return <Navigate to="/" />;
+  }
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -18,7 +29,7 @@ export default function AddReview(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link to={`/films/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a href="/" className="breadcrumbs__link">Add review</a>
@@ -39,7 +50,7 @@ export default function AddReview(): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={currentFilm.posterImage} alt={currentFilm.name} width="218" height="327" />
         </div>
       </div>
 
