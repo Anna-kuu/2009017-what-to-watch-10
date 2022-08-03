@@ -1,14 +1,14 @@
-import FilmCard from '../film-card/film-card';
+//import FilmCard from '../film-card/film-card';
 import Logo from '../../components/logo/logo';
+import {FilmInfo} from '../../types/films';
+import FilmList from '../../components/film-list/film-list';
 
 type MainScreenProps = {
-  filmsCount: number;
-  title: string;
-  genre: string;
-  releaseDate: number;
+  filmsInfo: FilmInfo[];
+  film: FilmInfo;
 }
 
-function MainScreen({filmsCount, title, genre, releaseDate}: MainScreenProps): JSX.Element {
+function MainScreen({filmsInfo, film}: MainScreenProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -38,14 +38,14 @@ function MainScreen({filmsCount, title, genre, releaseDate}: MainScreenProps): J
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseDate}</span>
+                <span className="film-card__genre">{film.genre}</span>
+                <span className="film-card__year">{film.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -105,9 +105,7 @@ function MainScreen({filmsCount, title, genre, releaseDate}: MainScreenProps): J
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {Array.from({ length: filmsCount }, (it, index) => <FilmCard key='index'/>)}
-          </div>
+          <FilmList films={filmsInfo} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
