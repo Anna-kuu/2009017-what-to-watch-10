@@ -1,7 +1,6 @@
 import Logo from '../../components/logo/logo';
 import {FilmInfo} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
-import { Link } from 'react-router-dom';
 
 type MyListProps = {
   films: FilmInfo[];

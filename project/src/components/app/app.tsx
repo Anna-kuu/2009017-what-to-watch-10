@@ -9,7 +9,7 @@ import NotFoundScreen from '../../pages/not-found/not-found-screen';
 import Player from '../../pages/player/player';
 import Login from '../../pages/sign-in/login';
 import PrivateRoute from '../private-route/private-route';
-import {FilmInfo, FilmReview} from '../../types/films';
+import {FilmInfo} from '../../types/films';
 
 type AppScreenProps = {
   filmsInfo: FilmInfo[];
@@ -32,7 +32,7 @@ function App({filmsInfo, film}: AppScreenProps): JSX.Element {
           path={AppRoute.Mylist}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={AuthorizationStatus.NoAuth}
             >
               <MyList films={filmsInfo}/>
             </PrivateRoute>
