@@ -25,6 +25,6 @@ export default function VideoPlayer ({film, isActive}:VideoPlayerProps): JSX.Ele
   }, [isActive]);
 
   return (
-    <video ref={videoRef} src={film.videoLink} poster={film.posterImage} muted/>
+    <video className="player__video" ref={videoRef} src={film.videoLink} poster={film.posterImage} muted/>
   );
 }
