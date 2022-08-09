@@ -15,7 +15,7 @@ export const films: FilmInfo[] = [
     starring: 'Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other',
     runTime: '1h 39m',
     isFavorite: true,
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d2/Frankenstein_trailer_%281931%29.webm/Frankenstein_trailer_%281931%29.webm.360p.vp9.webm',
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ export const films: FilmInfo[] = [
     starring: 'Eddie Redmayne, Katherine Waterston, Dan Fogler, Alison Sudol, Jude Law, Johnny Depp',
     runTime: '2h 14m',
     isFavorite: true,
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
   },
   {
     id: 3,
@@ -47,7 +47,7 @@ export const films: FilmInfo[] = [
     starring: 'John Travolta, Samuel L. Jackson, Uma Thurman and other',
     runTime: '1h 21m',
     isFavorite: true,
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d2/Frankenstein_trailer_%281931%29.webm/Frankenstein_trailer_%281931%29.webm.360p.vp9.webm',
   },
   {
     id: 4,
@@ -63,7 +63,7 @@ export const films: FilmInfo[] = [
     starring: 'Jason Statham, Brad Pitt, Stephen Graham and other',
     runTime: '1h 44m',
     isFavorite: true,
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
   },
   {
     id: 5,
@@ -79,7 +79,7 @@ export const films: FilmInfo[] = [
     starring: 'Jemaine Clement, Taika Waititi, Cori Gonzalez-Macuer and other',
     runTime: '1h 26m',
     isFavorite: false,
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d2/Frankenstein_trailer_%281931%29.webm/Frankenstein_trailer_%281931%29.webm.360p.vp9.webm',
   },
   {
     id: 6,
@@ -95,7 +95,7 @@ export const films: FilmInfo[] = [
     starring: 'Leonardo DiCaprio, Cate Blanchett, Kate Beckinsale and other',
     runTime: '2h 50m',
     isFavorite: false,
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
   },
   {
     id: 7,
@@ -111,7 +111,7 @@ export const films: FilmInfo[] = [
     starring: 'Rowan Atkinson, John Malkovich, Natalie Imbruglia and other',
     runTime: '1h 29m',
     isFavorite: false,
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d2/Frankenstein_trailer_%281931%29.webm/Frankenstein_trailer_%281931%29.webm.360p.vp9.webm',
   },
   {
     id: 8,
@@ -127,6 +127,6 @@ export const films: FilmInfo[] = [
     starring: 'Tommy Lee Jones, Josh Brolin, Javier Bardem and other',
     runTime: '2h 02m',
     isFavorite: false,
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
   },
 ];
