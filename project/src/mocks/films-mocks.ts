@@ -4,7 +4,7 @@ export const films: FilmInfo[] = [
   {
     id: 1,
     name: 'The Grand Budapest Hotel',
-    genre: 'Drama',
+    genre: 'Dramas',
     released: 2014,
     posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
     backgroundImage: 'img/bg-the-grand-budapest-hotel-poster.jpg',
@@ -36,7 +36,7 @@ export const films: FilmInfo[] = [
   {
     id: 3,
     name: 'Pulp Fiction',
-    genre: 'Drama',
+    genre: 'Dramas',
     released: 1994,
     posterImage: 'img/pulp-fiction.jpg',
     backgroundImage: 'img/pulp-fiction.jpg',
@@ -52,7 +52,7 @@ export const films: FilmInfo[] = [
   {
     id: 4,
     name: 'Snatch',
-    genre: 'Comedy',
+    genre: 'Comedies',
     released: 2000,
     posterImage: 'img/snatch.jpg',
     backgroundImage: 'img/snatch.jpg',
@@ -68,7 +68,7 @@ export const films: FilmInfo[] = [
   {
     id: 5,
     name: 'What We Do in the Shadows',
-    genre: 'Comedy',
+    genre: 'Comedies',
     released: 2014,
     posterImage: 'img/what-we-do-in-the-shadows.jpg',
     backgroundImage: 'img/what-we-do-in-the-shadows.jpg',
@@ -84,7 +84,7 @@ export const films: FilmInfo[] = [
   {
     id: 6,
     name: 'Aviator',
-    genre: 'Drama',
+    genre: 'Dramas',
     released: 2004,
     posterImage: 'img/aviator.jpg',
     backgroundImage: 'img/aviator.jpg',
@@ -116,7 +116,7 @@ export const films: FilmInfo[] = [
   {
     id: 8,
     name: 'No Country for Old Men',
-    genre: 'Drama',
+    genre: 'Dramas',
     released: 2007,
     posterImage: 'img/no-country-for-old-men.jpg',
     backgroundImage: 'img/no-country-for-old-men.jpg',
