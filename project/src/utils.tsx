@@ -10,7 +10,7 @@ export function getFilmsByGenre (genre: string, films: FilmInfo[]) {
 
 export function getGenresFilm (films: FilmInfo[]) {
   const genres = [...new Set(films.map((film) => film.genre))];
-  console.log(genres);
+  genres.splice(0, 0, 'All genres');
   return genres;
 }
 

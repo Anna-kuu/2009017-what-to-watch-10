@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import { genres } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { changeGenre } from '../../store/action';
 
 type GenresProps = {
   selectedGenre: string,
+  genres: string[],
 }
 
-export default function GenresList({selectedGenre}: GenresProps): JSX.Element {
+export default function GenresList({selectedGenre, genres}: GenresProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const genresList = genres.map((genre) => (
