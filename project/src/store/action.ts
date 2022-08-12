@@ -5,3 +5,5 @@ export const changeGenre = createAction('films/changeGenre', (value) => ({
 }));
 
 export const filmsShownCounter = createAction('films/filmsShownCounter');
+
+export const resetCounter = createAction('films/resetCounter');

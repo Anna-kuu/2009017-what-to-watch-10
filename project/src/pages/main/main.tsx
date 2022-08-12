@@ -2,8 +2,10 @@ import Logo from '../../components/logo/logo';
 import {FilmInfo} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
 import GenresList from '../../components/genres/genres';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMore from '../../components/show-more/show-more';
+import { useEffect } from 'react';
+import { resetCounter } from '../../store/action';
 
 
 type MainScreenProps = {
