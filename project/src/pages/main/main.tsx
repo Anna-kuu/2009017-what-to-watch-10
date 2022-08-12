@@ -1,9 +1,9 @@
-//import FilmCard from '../film-card/film-card';
 import Logo from '../../components/logo/logo';
 import {FilmInfo} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
 import GenresList from '../../components/genres/genres';
 import { useAppSelector } from '../../hooks';
+import ShowMore from '../../components/show-more/show-more';
 
 
 type MainScreenProps = {
@@ -12,7 +12,8 @@ type MainScreenProps = {
 }
 
 function MainScreen({filmsInfo, film}: MainScreenProps): JSX.Element {
-  const {filmsByGenre, selectedGenre, genres} = useAppSelector((state) => state);
+  const {filmsByGenre, selectedGenre, genres, filmsCounter} = useAppSelector((state) => state);
+  const shownFilms = filmsByGenre.slice(0, filmsCounter);
 
   return (
     <>
@@ -77,11 +78,8 @@ function MainScreen({filmsInfo, film}: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList selectedGenre={selectedGenre} genres={genres}/>
-          <FilmList films={filmsByGenre} />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <FilmList films={shownFilms} />
+          {((filmsByGenre.length - shownFilms.length) > 0) && <ShowMore />}
         </section>
 
         <footer className="page-footer">
