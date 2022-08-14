@@ -9,9 +9,13 @@ type GenresProps = {
 
 export default function GenresList({selectedGenre, genres}: GenresProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const handleChangeGenre = (genre: string) => () => {
+    dispatch(changeGenre(genre));
+    dispatch(resetCounter());
+  };
 
   const genresList = genres.map((genre) => (
-    <li onClick={()=>{dispatch(changeGenre(genre)); dispatch(resetCounter());}} key={genre} className={`catalog__genres-item ${(genre === selectedGenre) ? 'catalog__genres-item--active' : ''}`}>
+    <li onClick={handleChangeGenre(genre)} key={genre} className={`catalog__genres-item ${(genre === selectedGenre) ? 'catalog__genres-item--active' : ''}`}>
       <Link to="/" className="catalog__genres-link">{genre}</Link>
     </li>));
 

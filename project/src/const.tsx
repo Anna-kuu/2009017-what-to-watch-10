@@ -13,4 +13,4 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const genres = ['All genres', 'Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'];
+export const MIN_NUMBER_FILMS = 3;
