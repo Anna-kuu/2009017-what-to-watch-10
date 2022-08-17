@@ -1,6 +1,8 @@
 import { FilmInfo } from '../../types/films';
 import {useRef, useEffect} from 'react';
 
+const DELAY = 1000;
+
 type VideoPlayerProps = {
   film: FilmInfo;
   isActive: boolean;
@@ -17,7 +19,7 @@ export default function VideoPlayer ({film, isActive}:VideoPlayerProps): JSX.Ele
     if (isActive) {
       const videoPlayTimeout = setTimeout(() =>
         videoRef.current && videoRef.current.play(),
-      1000);
+      DELAY);
 
       return () => clearTimeout(videoPlayTimeout);
     }

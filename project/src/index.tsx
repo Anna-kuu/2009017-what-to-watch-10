@@ -1,14 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import App from './components/app/app';
 import { films } from './mocks/films-mocks';
-/*
-const Film = {
-  filmsCount: 20,
-  title: 'The Grand Budapest Hotel',
-  genre: 'Drama',
-  releaseDate: 2014,
-};*/
+import { store } from './store';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -16,9 +12,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      filmsInfo={films}
-      film={films[0]}
-    />
+    <Provider store={store}>
+      <App
+        filmsInfo={films}
+        film={films[0]}
+      />
+    </Provider>
   </React.StrictMode>,
 );
