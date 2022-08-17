@@ -1,18 +1,15 @@
 import Logo from '../../components/logo/logo';
-import {FilmInfo} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
 import GenresList from '../../components/genres/genres';
 import {useAppSelector} from '../../hooks';
 import ShowMore from '../../components/show-more/show-more';
 
-type MainScreenProps = {
-  filmsInfo: FilmInfo[];
-  film: FilmInfo;
-}
+//
 
-function MainScreen({filmsInfo, film}: MainScreenProps): JSX.Element {
-  const {filmsByGenre, selectedGenre, genres, filmsCounter} = useAppSelector((state) => state);
+function MainScreen(): JSX.Element {
+  const {filmsByGenre, selectedGenre, genres, filmsCounter, promoFilm, films} = useAppSelector((state) => state);
   const shownFilms = filmsByGenre.slice(0, filmsCounter);
+  const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
 
   return (
     <>
@@ -43,14 +40,14 @@ function MainScreen({filmsInfo, film}: MainScreenProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={film.posterImage} alt={film.name} width="218" height="327" />
+              <img src={promoFilm?.posterImage} alt={promoFilm?.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.name}</h2>
+              <h2 className="film-card__title">{promoFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.released}</span>
+                <span className="film-card__genre">{promoFilm?.genre}</span>
+                <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -65,7 +62,7 @@ function MainScreen({filmsInfo, film}: MainScreenProps): JSX.Element {
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{favoriteFilms}</span>
                 </button>
               </div>
             </div>

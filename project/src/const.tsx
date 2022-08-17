@@ -13,4 +13,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const MIN_NUMBER_FILMS = 3;
+export const MIN_NUMBER_FILMS = 8;
+
+export enum APIRoute {
+  Films = '/films',
+  PromoFilm = '/promo',
+  Login = '/login',
+  Logout = '/lodout',
+}
+
+export const TIMEOUT_SHOW_ERROR = 2000;

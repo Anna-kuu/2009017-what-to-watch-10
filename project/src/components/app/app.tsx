@@ -1,28 +1,31 @@
 
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import { useAppSelector } from '../../hooks';
 import AddReview from '../../pages/add-review/add-review';
 import MainScreen from '../../pages/main/main';
-import Film from '../../pages/movie-page/film';
+import MoviePage from '../../pages/movie-page/movie-page';
 import MyList from '../../pages/my-list/my-list';
 import NotFoundScreen from '../../pages/not-found/not-found-screen';
 import Player from '../../pages/player/player';
 import Login from '../../pages/sign-in/login';
+import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
-import {FilmInfo} from '../../types/films';
 
-type AppScreenProps = {
-  filmsInfo: FilmInfo[];
-  film: FilmInfo;
-}
+function App(): JSX.Element {
+  const {isDataLoaded} = useAppSelector((state) => state);
 
-function App({filmsInfo, film}: AppScreenProps): JSX.Element {
+  if (isDataLoaded){
+    return (
+      <LoadingScreen />
+    );
+  }
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen filmsInfo={filmsInfo} film={film}/>}
+          element={<MainScreen />}
         />
         <Route
           path={AppRoute.Login}
@@ -34,21 +37,21 @@ function App({filmsInfo, film}: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.NoAuth}
             >
-              <MyList films={filmsInfo}/>
+              <MyList />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Film}
-          element={<Film films={filmsInfo}/>}
+          element={<MoviePage />}
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReview films={filmsInfo}/>}
+          element={<AddReview />}
         />
         <Route
           path={AppRoute.Player}
-          element={<Player films={filmsInfo}/>}
+          element={<Player />}
         />
         <Route
           path="*"

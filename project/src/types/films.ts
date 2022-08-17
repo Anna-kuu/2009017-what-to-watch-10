@@ -1,18 +1,21 @@
-export type FilmInfo = {
-  id: number;
-  name: string;
-  genre: string;
-  released: number;
-  posterImage: string;
+export type Film = {
+  id: number
+  name: string
+  posterImage: string
+  previewImage: string
   backgroundImage: string
-  rating: number;
+  backgroundColor: string
+  videoLink: string
+  previewVideoLink: string
+  description: string
+  rating: number
   scoresCount: number
-  description: string;
-  director: string;
-  starring: string;
-  runTime: string;
-  isFavorite: boolean;
-  videoLink: string;
+  director: string
+  starring: [string]
+  runTime: number
+  genre: string
+  released: number
+  isFavorite: boolean
 };
 
 export type FilmReview = {
@@ -25,3 +28,5 @@ export type FilmReview = {
     name: string;
   }
 };
+
+export type Films = Film[];
