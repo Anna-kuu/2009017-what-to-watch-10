@@ -1,12 +1,13 @@
 import Logo from '../../components/logo/logo';
 import {useParams, Navigate, Link} from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
+import { AppRoute } from '../../const';
 
 export default function MoviePage(): JSX.Element {
   const params = useParams();
   const currentFilm = useAppSelector((state) => state.films).find((film) => film.id === Number(params.id));
   if (!currentFilm) {
-    return <Navigate to="/" />;
+    return <Navigate to={AppRoute.Root} />;
   }
   return (
     <>

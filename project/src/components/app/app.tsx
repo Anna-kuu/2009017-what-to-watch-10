@@ -1,5 +1,5 @@
 
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
 import AddReview from '../../pages/add-review/add-review';
@@ -50,7 +50,13 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReview />}
+          element={
+            <PrivateRoute
+              authorizationStatus={authorizationStatus}
+            >
+              <AddReview />
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.Player}

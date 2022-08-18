@@ -2,14 +2,17 @@ import Logo from '../../components/logo/logo';
 import {useParams, Navigate, Link} from 'react-router-dom';
 import AddReviewComment from '../../components/add-review-comment/add-review-comment';
 import { useAppSelector } from '../../hooks';
+import { AppRoute } from '../../const';
 
 
 export default function AddReview(): JSX.Element {
   const params = useParams();
   const currentFilm = useAppSelector((state) => state.films).find((film) => film.id === Number(params.id));
+
   if (!currentFilm) {
-    return <Navigate to="/" />;
+    return <Navigate to={AppRoute.Root} />;
   }
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
