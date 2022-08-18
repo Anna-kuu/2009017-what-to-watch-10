@@ -1,10 +1,10 @@
 import {Link} from 'react-router-dom';
-import {FilmInfo} from '../../types/films';
+import {Film} from '../../types/films';
 import {useState} from 'react';
 import VideoPlayer from '../../components/video-player/video-player';
 
 type FilmCardProps = {
-  film: FilmInfo;
+  film: Film;
 }
 
 export default function FilmCard({film}: FilmCardProps): JSX.Element {

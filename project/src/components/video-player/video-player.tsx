@@ -1,10 +1,10 @@
-import { FilmInfo } from '../../types/films';
+import { Film } from '../../types/films';
 import {useRef, useEffect} from 'react';
 
 const DELAY = 1000;
 
 type VideoPlayerProps = {
-  film: FilmInfo;
+  film: Film;
   isActive: boolean;
 }
 

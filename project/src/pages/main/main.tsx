@@ -1,56 +1,43 @@
 import Logo from '../../components/logo/logo';
-import {FilmInfo} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
 import GenresList from '../../components/genres/genres';
 import {useAppSelector} from '../../hooks';
 import ShowMore from '../../components/show-more/show-more';
+import UserBlock from '../../components/user-block/user-block';
 
-type MainScreenProps = {
-  filmsInfo: FilmInfo[];
-  film: FilmInfo;
-}
-
-function MainScreen({filmsInfo, film}: MainScreenProps): JSX.Element {
-  const {filmsByGenre, selectedGenre, genres, filmsCounter} = useAppSelector((state) => state);
+export default function MainScreen(): JSX.Element {
+  const {filmsByGenre, selectedGenre, genres, filmsCounter, promoFilm, films} = useAppSelector((state) => state);
   const shownFilms = filmsByGenre.slice(0, filmsCounter);
+  const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={promoFilm?.backgroundImage} alt={promoFilm?.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
           <div className="logo">
-            {<Logo/>}
+            <Logo/>
           </div>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href="/" className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={film.posterImage} alt={film.name} width="218" height="327" />
+              <img src={promoFilm?.posterImage} alt={promoFilm?.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.name}</h2>
+              <h2 className="film-card__title">{promoFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.released}</span>
+                <span className="film-card__genre">{promoFilm?.genre}</span>
+                <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -65,7 +52,7 @@ function MainScreen({filmsInfo, film}: MainScreenProps): JSX.Element {
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{favoriteFilms}</span>
                 </button>
               </div>
             </div>
@@ -99,4 +86,3 @@ function MainScreen({filmsInfo, film}: MainScreenProps): JSX.Element {
   );
 }
 
-export default MainScreen;

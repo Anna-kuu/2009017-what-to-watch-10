@@ -1,16 +1,13 @@
-import {FilmInfo} from '../../types/films';
 import {useParams, Navigate} from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
 
-type PlayerProps = {
-  films: FilmInfo[];
-};
-
-export default function Player({films}: PlayerProps): JSX.Element {
+export default function Player(): JSX.Element {
   const params = useParams();
 
-  const currentFilm = films.find((film) => film.id === Number(params.id));
+  const currentFilm = useAppSelector((state) => state.films).find((film) => film.id === Number(params.id));
   if (!currentFilm) {
-    return <Navigate to="/" />;
+    return <Navigate to={AppRoute.Root}/>;
   }
   return (
     <div className="player">

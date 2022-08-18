@@ -1,12 +1,9 @@
 import Logo from '../../components/logo/logo';
-import {FilmInfo} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
+import { useAppSelector } from '../../hooks';
 
-type MyListProps = {
-  films: FilmInfo[];
-}
-export default function MyList({films}: MyListProps): JSX.Element {
-  const favoriteFilms = films.filter((film) => film.isFavorite === true);
+export default function MyList(): JSX.Element {
+  const favoriteFilms = useAppSelector((state) => state.films).filter((film) => film.isFavorite === true);
 
   return (
     <div className="user-page">
