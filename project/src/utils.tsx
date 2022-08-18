@@ -1,3 +1,4 @@
+import { AuthorizationStatus } from './const';
 import { Films } from './types/films';
 
 const MAX_GENRES = 9;
@@ -16,3 +17,5 @@ export function getGenresFilm (films: Films) {
   return genres;
 }
 
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;

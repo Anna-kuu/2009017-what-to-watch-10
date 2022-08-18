@@ -3,6 +3,7 @@ import FilmList from '../../components/film-list/film-list';
 import GenresList from '../../components/genres/genres';
 import {useAppSelector} from '../../hooks';
 import ShowMore from '../../components/show-more/show-more';
+import { Link } from 'react-router-dom';
 
 //
 
@@ -15,7 +16,7 @@ function MainScreen(): JSX.Element {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={promoFilm?.backgroundImage} alt={promoFilm?.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -32,7 +33,7 @@ function MainScreen(): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <a href="/" className="user-block__link">Sign out</a>
+              <Link to={'/login'} className="user-block__link">Sign in</Link>
             </li>
           </ul>
         </header>
