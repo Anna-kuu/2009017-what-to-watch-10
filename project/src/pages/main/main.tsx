@@ -3,12 +3,9 @@ import FilmList from '../../components/film-list/film-list';
 import GenresList from '../../components/genres/genres';
 import {useAppSelector} from '../../hooks';
 import ShowMore from '../../components/show-more/show-more';
-import { Link } from 'react-router-dom';
 import UserBlock from '../../components/user-block/user-block';
 
-//
-
-function MainScreen(): JSX.Element {
+export default function MainScreen(): JSX.Element {
   const {filmsByGenre, selectedGenre, genres, filmsCounter, promoFilm, films} = useAppSelector((state) => state);
   const shownFilms = filmsByGenre.slice(0, filmsCounter);
   const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
@@ -24,7 +21,7 @@ function MainScreen(): JSX.Element {
 
         <header className="page-header film-card__head">
           <div className="logo">
-            {<Logo/>}
+            <Logo/>
           </div>
 
           <UserBlock />
@@ -89,4 +86,3 @@ function MainScreen(): JSX.Element {
   );
 }
 
-export default MainScreen;
