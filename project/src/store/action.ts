@@ -1,7 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Film, Films, Reviews } from '../types/films';
-import { AppRoute, AuthorizationStatus } from '../const';
-import { ReviewData } from '../types/review-data';
+import { AuthorizationStatus } from '../const';
 
 export const changeGenre = createAction('films/changeGenre', (value) => ({
   payload: value,
@@ -27,4 +26,4 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 
 export const setError = createAction<string | null>('films/setError');
 
-export const redirectToRoute = createAction<AppRoute>('film/redirectToRoute');
+export const redirectToRoute = createAction<string>('film/redirectToRoute');

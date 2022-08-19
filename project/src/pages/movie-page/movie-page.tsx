@@ -7,7 +7,7 @@ import { fetchFilmByIdAction, fetchReviewAction, fetchSimilarFilmsAction } from 
 import NotFoundScreen from '../not-found/not-found-screen';
 import UserBlock from '../../components/user-block/user-block';
 import { AuthorizationStatus } from '../../const';
-import Overview from '../../components/film-overview/overview';
+//import Overview from '../../components/film-overview/overview';
 import Review from '../../components/film-reviews/reviews';
 
 export default function MoviePage(): JSX.Element {
@@ -135,3 +135,5 @@ export default function MoviePage(): JSX.Element {
     </>
   );
 }
+
+//<Overview film={currentFilm}/>

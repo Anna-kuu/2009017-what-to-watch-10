@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { Film, Films, Review, Reviews } from '../types/films';
+import { Film, Films, Reviews } from '../types/films';
 import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { loadFilmById, loadFilms, loadPromoFilm, loadReviews, loadSimilarFilms, redirectToRoute, requireAuthorization, setDataLoadedStatus, setError } from './action';
 import { saveToken, dropToken } from '../services/token';
@@ -75,7 +75,7 @@ export const fetchReviewAction = createAsyncThunk<void, number, {
   },
 );
 
-export const reviewAction = createAsyncThunk<void, ReviewData, {
+export const addReviewAction = createAsyncThunk<void, ReviewData, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
@@ -84,6 +84,7 @@ export const reviewAction = createAsyncThunk<void, ReviewData, {
   async({id, comment, rating}, {dispatch, extra: api}) => {
     const {data} = await api.post<Reviews>(`${APIRoute.Review}/${id}`, {comment, rating});
     dispatch(loadReviews(data));
+    dispatch(redirectToRoute(`${APIRoute.Films}/${id}`));
   },
 );
 

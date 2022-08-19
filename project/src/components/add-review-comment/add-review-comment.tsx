@@ -1,13 +1,39 @@
-import {useState, ChangeEvent} from 'react';
-import Rating from '../rating/rating';
+import {useState, ChangeEvent, FormEvent, Fragment} from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { addReviewAction } from '../../store/api-actions';
+
+const RATING_VALUES = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
 export default function AddReviewComment(): JSX.Element {
+  const params = useParams();
+  const id = Number(params.id);
   const [comment, setComment] = useState('');
+  const [rating, setRating] = useState(0);
+  const dispatch = useAppDispatch();
   const commentHandleChange = ( evt: ChangeEvent<HTMLTextAreaElement>) => setComment(evt.target.value);
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    dispatch(addReviewAction({
+      comment: comment,
+      rating: rating,
+      id: id,
+    }));
+  };
+
+  const stars = RATING_VALUES.map((index) => (
+    <Fragment key={index}>
+      <input className="rating__input" id={`star-${index}`} type="radio" name="rating" value={index} onChange={() => setRating(index)} checked={rating === index}/>
+      <label className="rating__label" htmlFor={`star-${index}`}>{`Rating ${index}`}</label>
+    </Fragment>
+  ));
   return (
-    <form action="#" className="add-review__form">
+    <form onSubmit={handleSubmit} action="#" className="add-review__form">
       <div className="rating">
-        <Rating />
+        <div className="rating__stars">
+          {stars}
+        </div>
       </div>
 
       <div className="add-review__text">

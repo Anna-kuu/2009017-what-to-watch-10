@@ -6,7 +6,6 @@ type ReviewProps = {
 
 export default function Review({reviews}: ReviewProps): JSX.Element {
 
-
   const reviewList = reviews.map((review) => (
     <div key={review.id} className="review">
       <blockquote className="review__quote">
@@ -21,7 +20,6 @@ export default function Review({reviews}: ReviewProps): JSX.Element {
       <div className="review__rating">{review.rating}</div>
     </div>
   ));
-  console.log(reviews)
 
   return (
     <div className="film-card__reviews film-card__row">
