@@ -2,8 +2,6 @@ import {Link} from 'react-router-dom';
 import {Film} from '../../types/films';
 import {useState} from 'react';
 import VideoPlayer from '../../components/video-player/video-player';
-import { useAppDispatch } from '../../hooks';
-import { fetchFilmByIdAction, fetchReviewAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 
 type FilmCardProps = {
   film: Film;
@@ -11,13 +9,6 @@ type FilmCardProps = {
 
 export default function FilmCard({film}: FilmCardProps): JSX.Element {
   const [isActiveCard, setActiveCard] = useState(false);
-  const dispatch = useAppDispatch();
-
-  const handleClickFilm = () => {
-    dispatch(fetchFilmByIdAction(film.id));
-    dispatch(fetchSimilarFilmsAction(film.id));
-    dispatch(fetchReviewAction(film.id));
-  };
 
 
   return (
@@ -28,7 +19,7 @@ export default function FilmCard({film}: FilmCardProps): JSX.Element {
           : <img src={film.posterImage} alt={film.name} width="280" height="175" />}
       </div>
       <h3 className="small-film-card__title">
-        <Link onClick={handleClickFilm} className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
       </h3>
     </article>
   );

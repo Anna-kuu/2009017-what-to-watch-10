@@ -1,23 +1,45 @@
 import Logo from '../../components/logo/logo';
-import {Navigate, Link} from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
-import { AppRoute } from '../../const';
+import {Link, useParams} from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import FilmList from '../../components/film-list/film-list';
+import { useEffect } from 'react';
+import { fetchFilmByIdAction, fetchReviewAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import NotFoundScreen from '../not-found/not-found-screen';
+import UserBlock from '../../components/user-block/user-block';
+import { AuthorizationStatus } from '../../const';
 
 export default function MoviePage(): JSX.Element {
+  const params = useParams();
+  const dispatch = useAppDispatch();
+
+  const id = Number(params.id);
 
   const currentFilm = useAppSelector((state) => state.film);
   const similarFilms = useAppSelector((state) => state.similarFilms);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  console.log(authorizationStatus)
+  useEffect(() => {
+    if (id === null) {
+      return;
+    }
 
-  if (!currentFilm) {
-    return <Navigate to={AppRoute.Root} />;
+    dispatch(fetchFilmByIdAction(id));
+    dispatch(fetchSimilarFilmsAction(id));
+    dispatch(fetchReviewAction(id));
+  }, [id, dispatch]);
+
+  if (currentFilm === null) {
+    return (
+      <NotFoundScreen/>
+    );
   }
+
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
+            <img src={currentFilm?.backgroundImage} alt={currentFilm?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -27,28 +49,19 @@ export default function MoviePage(): JSX.Element {
               {<Logo/>}
             </div>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a href="/" className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <UserBlock />
           </header>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{currentFilm.name}</h2>
+              <h2 className="film-card__title">{currentFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{currentFilm.genre}</span>
-                <span className="film-card__year">{currentFilm.released}</span>
+                <span className="film-card__genre">{currentFilm?.genre}</span>
+                <span className="film-card__year">{currentFilm?.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`/player/${currentFilm.id}`}className="btn btn--play film-card__button" type="button">
+                <Link to={`/player/${currentFilm?.id}`}className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -61,7 +74,9 @@ export default function MoviePage(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button">Add review</Link>
+                {(authorizationStatus === AuthorizationStatus.Auth)
+                  ? <Link to={`/films/${currentFilm?.id}/review`} className="btn film-card__button">Add review</Link>
+                  : ''}
               </div>
             </div>
           </div>
@@ -70,7 +85,7 @@ export default function MoviePage(): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={currentFilm.posterImage} alt={currentFilm.name} width="218" height="327" />
+              <img src={currentFilm?.posterImage} alt={currentFilm?.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -89,19 +104,19 @@ export default function MoviePage(): JSX.Element {
               </nav>
 
               <div className="film-rating">
-                <div className="film-rating__score">{currentFilm.rating}</div>
+                <div className="film-rating__score">{currentFilm?.rating}</div>
                 <p className="film-rating__meta">
                   <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{currentFilm.scoresCount} ratings</span>
+                  <span className="film-rating__count">{currentFilm?.scoresCount} ratings</span>
                 </p>
               </div>
 
               <div className="film-card__text">
-                <p>{currentFilm.description}</p>
+                <p>{currentFilm?.description}</p>
 
-                <p className="film-card__director"><strong>Director: {currentFilm.director}</strong></p>
+                <p className="film-card__director"><strong>Director: {currentFilm?.director}</strong></p>
 
-                <p className="film-card__starring"><strong>Starring: {currentFilm.starring}</strong></p>
+                <p className="film-card__starring"><strong>Starring: {currentFilm?.starring}</strong></p>
               </div>
             </div>
           </div>
