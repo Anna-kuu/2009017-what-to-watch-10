@@ -7,6 +7,8 @@ import { fetchFilmByIdAction, fetchReviewAction, fetchSimilarFilmsAction } from 
 import NotFoundScreen from '../not-found/not-found-screen';
 import UserBlock from '../../components/user-block/user-block';
 import { AuthorizationStatus } from '../../const';
+import Overview from '../../components/film-overview/overview';
+import Review from '../../components/film-reviews/reviews';
 
 export default function MoviePage(): JSX.Element {
   const params = useParams();
@@ -17,7 +19,7 @@ export default function MoviePage(): JSX.Element {
   const currentFilm = useAppSelector((state) => state.film);
   const similarFilms = useAppSelector((state) => state.similarFilms);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  console.log(authorizationStatus)
+  const reviews = useAppSelector((state) => state.reviews);
   useEffect(() => {
     if (id === null) {
       return;
@@ -102,22 +104,9 @@ export default function MoviePage(): JSX.Element {
                   </li>
                 </ul>
               </nav>
+              <Review reviews={reviews}/>
 
-              <div className="film-rating">
-                <div className="film-rating__score">{currentFilm?.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{currentFilm?.scoresCount} ratings</span>
-                </p>
-              </div>
 
-              <div className="film-card__text">
-                <p>{currentFilm?.description}</p>
-
-                <p className="film-card__director"><strong>Director: {currentFilm?.director}</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: {currentFilm?.starring}</strong></p>
-              </div>
             </div>
           </div>
         </div>
