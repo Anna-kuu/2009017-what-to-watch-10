@@ -7,8 +7,7 @@ import { fetchFilmByIdAction, fetchReviewAction, fetchSimilarFilmsAction } from 
 import NotFoundScreen from '../not-found/not-found-screen';
 import UserBlock from '../../components/user-block/user-block';
 import { AuthorizationStatus } from '../../const';
-//import Overview from '../../components/film-overview/overview';
-import Review from '../../components/film-reviews/reviews';
+import Tabs from '../../components/tabs/tabs';
 
 export default function MoviePage(): JSX.Element {
   const params = useParams();
@@ -90,24 +89,8 @@ export default function MoviePage(): JSX.Element {
               <img src={currentFilm?.posterImage} alt={currentFilm?.name} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-              <Review reviews={reviews}/>
+            <Tabs film={currentFilm} reviews={reviews} />
 
-
-            </div>
           </div>
         </div>
       </section>
@@ -136,4 +119,3 @@ export default function MoviePage(): JSX.Element {
   );
 }
 
-//<Overview film={currentFilm}/>
