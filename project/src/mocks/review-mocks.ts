@@ -1,6 +1,6 @@
-import { FilmReview } from '../types/films';
+import { Reviews } from '../types/films';
 
-export const reviews: FilmReview[] = [
+export const reviews: Reviews = [
   {
     id: 1,
     comment: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.',
