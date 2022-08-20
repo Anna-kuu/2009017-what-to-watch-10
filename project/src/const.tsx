@@ -20,6 +20,7 @@ export enum APIRoute {
   PromoFilm = '/promo',
   Login = '/login',
   Logout = '/logout',
+  Review = '/comments'
 }
 
 export const TIMEOUT_SHOW_ERROR = 2000;

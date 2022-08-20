@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import App from './components/app/app';
 import ErrorMessage from './components/error-message/error-mesage';
 import { store } from './store';
-import { checkAuthAction, fetchFilmsAction, FetchPromoFilmAction } from './store/api-actions';
+import { checkAuthAction, fetchFilmsAction, fetchPromoFilmAction } from './store/api-actions';
 
 store.dispatch(fetchFilmsAction());
-store.dispatch(FetchPromoFilmAction());
+store.dispatch(fetchPromoFilmAction());
 store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
@@ -23,4 +23,3 @@ root.render(
   </React.StrictMode>,
 );
 
-//

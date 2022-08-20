@@ -10,6 +10,7 @@ type FilmCardProps = {
 export default function FilmCard({film}: FilmCardProps): JSX.Element {
   const [isActiveCard, setActiveCard] = useState(false);
 
+
   return (
     <article onMouseEnter={() => setActiveCard(!isActiveCard)} onMouseLeave={() => setActiveCard(!isActiveCard)} className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
