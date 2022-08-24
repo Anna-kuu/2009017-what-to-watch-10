@@ -43,7 +43,7 @@ export const filmData = createSlice({
       })
       .addCase(addReviewAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
-        state.isDataLoaded = true;
+        state.isDataLoaded = false;
       });
   }
 })

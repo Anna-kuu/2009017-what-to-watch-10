@@ -3,11 +3,12 @@ import {useParams, Navigate, Link} from 'react-router-dom';
 import AddReviewComment from '../../components/add-review-comment/add-review-comment';
 import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
+import { getFilms } from '../../store/films-data/selectors';
 
 
 export default function AddReview(): JSX.Element {
   const params = useParams();
-  const currentFilm = useAppSelector((state) => state.films).find((film) => film.id === Number(params.id));
+  const currentFilm = useAppSelector(getFilms).find((film) => film.id === Number(params.id));
 
   if (!currentFilm) {
     return <Navigate to={AppRoute.Root} />;

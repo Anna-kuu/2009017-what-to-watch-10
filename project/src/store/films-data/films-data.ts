@@ -8,16 +8,13 @@ const initialState: FilmsData = {
   selectedGenre: INITIAL_GENRE,
   films: [],
   promoFilm: null,
-  film: null,
-  similarFilms: [],
   filmsByGenre: [],
-  reviews: [],
   isDataLoaded: false,
   filmsCounter: MIN_NUMBER_FILMS,
 };
 
 export const filmsData = createSlice({
-  name: NameSpace.Film,
+  name: NameSpace.Films,
   initialState,
   reducers: {
     changeGenre: (state, action) => {

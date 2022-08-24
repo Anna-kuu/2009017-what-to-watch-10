@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
-import {resetCounter} from '../../store/action';
 import { useAppDispatch } from '../../hooks';
+import { resetCounter } from '../../store/films-data/films-data';
 
 export default function Logo(): JSX.Element {
   const dispatch = useAppDispatch();

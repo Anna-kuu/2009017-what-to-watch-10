@@ -1,11 +1,12 @@
 import {useParams, Navigate} from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getFilms } from '../../store/films-data/selectors';
 
 export default function Player(): JSX.Element {
   const params = useParams();
 
-  const currentFilm = useAppSelector((state) => state.films).find((film) => film.id === Number(params.id));
+  const currentFilm = useAppSelector(getFilms).find((film) => film.id === Number(params.id));
   if (!currentFilm) {
     return <Navigate to={AppRoute.Root}/>;
   }

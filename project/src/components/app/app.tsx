@@ -14,9 +14,12 @@ import HistoryRouter from '../history-route/history-route';
 import { browserHistory } from '../../browser-history';
 import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
+import { getLoadedDataStatus } from '../../store/films-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function App(): JSX.Element {
-  const {isDataLoaded, authorizationStatus} = useAppSelector((state) => state);
+  const isDataLoaded = useAppSelector(getLoadedDataStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (isDataLoaded || isCheckedAuth(authorizationStatus)){
     return (

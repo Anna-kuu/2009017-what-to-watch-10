@@ -5,9 +5,15 @@ import {useAppSelector} from '../../hooks';
 import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
 import { getGenresFilm } from '../../utils';
+import { getFilms, getFilmsCounter, getPromoFilm, getSelectedGenre, getFilmsByGenre } from '../../store/films-data/selectors';
 
 export default function MainScreen(): JSX.Element {
-  const {filmsByGenre, selectedGenre, filmsCounter, promoFilm, films} = useAppSelector((state) => state);
+  //const {filmsByGenre, selectedGenre, filmsCounter, promoFilm, films} = useAppSelector((state) => state);
+  const films = useAppSelector(getFilms);
+  const promoFilm = useAppSelector(getPromoFilm);
+  const filmsByGenre = useAppSelector(getFilmsByGenre,);
+  const selectedGenre = useAppSelector(getSelectedGenre);
+  const filmsCounter = useAppSelector(getFilmsCounter);
   const genres = getGenresFilm(films);
   const shownFilms = filmsByGenre.slice(0, filmsCounter);
   const favoriteFilms = films.filter((film) => film.isFavorite === true).length;

@@ -8,6 +8,8 @@ import NotFoundScreen from '../not-found/not-found-screen';
 import UserBlock from '../../components/user-block/user-block';
 import { AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
+import { getFilm, getReviews, getSimilarFilms } from '../../store/film-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 export default function MoviePage(): JSX.Element {
   const params = useParams();
@@ -15,10 +17,11 @@ export default function MoviePage(): JSX.Element {
 
   const id = Number(params.id);
 
-  const currentFilm = useAppSelector((state) => state.film);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const reviews = useAppSelector((state) => state.reviews);
+  const currentFilm = useAppSelector(getFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const reviews = useAppSelector(getReviews);
+
   useEffect(() => {
     if (id === null) {
       return;
