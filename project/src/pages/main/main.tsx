@@ -4,9 +4,11 @@ import GenresList from '../../components/genres/genres';
 import {useAppSelector} from '../../hooks';
 import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
+import { getGenresFilm } from '../../utils';
 
 export default function MainScreen(): JSX.Element {
-  const {filmsByGenre, selectedGenre, genres, filmsCounter, promoFilm, films} = useAppSelector((state) => state);
+  const {filmsByGenre, selectedGenre, filmsCounter, promoFilm, films} = useAppSelector((state) => state);
+  const genres = getGenresFilm(films);
   const shownFilms = filmsByGenre.slice(0, filmsCounter);
   const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
 

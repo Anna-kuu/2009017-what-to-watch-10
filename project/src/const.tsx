@@ -1,3 +1,7 @@
+export const MIN_NUMBER_FILMS = 8;
+export const FILM_COUNTER_STEP = 8;
+export const INITIAL_GENRE = 'All genres';
+
 export enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -13,8 +17,6 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const MIN_NUMBER_FILMS = 8;
-
 export enum APIRoute {
   Films = '/films',
   PromoFilm = '/promo',
@@ -23,4 +25,9 @@ export enum APIRoute {
   Review = '/comments'
 }
 
-export const TIMEOUT_SHOW_ERROR = 2000;
+export enum NameSpace {
+  Data = 'DATA',
+  Films = 'FILMS',
+  Film = 'FILM',
+  User = 'USER',
+}

@@ -1,12 +1,12 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeGenre, filmsShownCounter, loadFilms, loadPromoFilm, resetCounter, setDataLoadedStatus, requireAuthorization, setError, loadFilmById, loadSimilarFilms, loadReviews} from './action';
-import { getFilmsByGenre, getGenresFilm } from '../utils';
-import { MIN_NUMBER_FILMS, AuthorizationStatus } from '../const';
+import {changeGenre, filmsShownCounter, loadFilms, loadPromoFilm, resetCounter, setDataLoadedStatus, loadFilmById, loadSimilarFilms, loadReviews} from './action';
+import { getFilmsByGenre} from '../utils';
+import { INITIAL_GENRE, MIN_NUMBER_FILMS} from '../const';
 import { Film, Films, Reviews } from '../types/films';
 
 
 const FILM_COUNTER_STEP = 8;
-const INITIAL_GENRE = 'All genres';
+
 
 type InitialState = {
   selectedGenre: string,
@@ -16,11 +16,8 @@ type InitialState = {
   similarFilms: Films,
   filmsByGenre: Films,
   reviews: Reviews,
-  genres: string[],
   filmsCounter: number,
   isDataLoaded: boolean,
-  authorizationStatus: AuthorizationStatus,
-  error: string | null,
 };
 
 const initialState: InitialState = {
@@ -31,11 +28,8 @@ const initialState: InitialState = {
   similarFilms: [],
   filmsByGenre: [],
   reviews: [],
-  genres: [],
   filmsCounter: MIN_NUMBER_FILMS,
   isDataLoaded: false,
-  authorizationStatus: AuthorizationStatus.Unknown,
-  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -52,7 +46,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
-      state.genres = getGenresFilm(action.payload);
       state.filmsByGenre = action.payload;
     })
     .addCase(loadPromoFilm, (state,action)=> {
@@ -69,12 +62,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
-    })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     });
 });
 
