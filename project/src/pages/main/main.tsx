@@ -1,13 +1,13 @@
 import Logo from '../../components/logo/logo';
-import FilmList from '../../components/film-list/film-list';
-import GenresList from '../../components/genres/genres';
 import {useAppSelector} from '../../hooks';
-import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
+import { getFilms, getPromoFilm } from '../../store/films-data/selectors';
+import Catalog from '../../components/catalog/catalog';
+import { Link } from 'react-router-dom';
 
 export default function MainScreen(): JSX.Element {
-  const {filmsByGenre, selectedGenre, genres, filmsCounter, promoFilm, films} = useAppSelector((state) => state);
-  const shownFilms = filmsByGenre.slice(0, filmsCounter);
+  const films = useAppSelector(getFilms);
+  const promoFilm = useAppSelector(getPromoFilm);
   const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
 
   return (
@@ -41,12 +41,12 @@ export default function MainScreen(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <Link to={`/player/${promoFilm?.id}`} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
@@ -61,12 +61,7 @@ export default function MainScreen(): JSX.Element {
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList selectedGenre={selectedGenre} genres={genres}/>
-          <FilmList films={shownFilms} />
-          {((filmsByGenre.length - shownFilms.length) > 0) && <ShowMore />}
-        </section>
+        <Catalog />
 
         <footer className="page-footer">
           <div className="logo">

@@ -8,6 +8,9 @@ import NotFoundScreen from '../not-found/not-found-screen';
 import UserBlock from '../../components/user-block/user-block';
 import { AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
+import { getFilm, getReviews, getSimilarFilms } from '../../store/film-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getFilms } from '../../store/films-data/selectors';
 
 export default function MoviePage(): JSX.Element {
   const params = useParams();
@@ -15,10 +18,13 @@ export default function MoviePage(): JSX.Element {
 
   const id = Number(params.id);
 
-  const currentFilm = useAppSelector((state) => state.film);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const reviews = useAppSelector((state) => state.reviews);
+  const currentFilm = useAppSelector(getFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const reviews = useAppSelector(getReviews);
+  const films = useAppSelector(getFilms);
+  const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
+
   useEffect(() => {
     if (id === null) {
       return;
@@ -73,7 +79,7 @@ export default function MoviePage(): JSX.Element {
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{favoriteFilms}</span>
                 </button>
                 {(authorizationStatus === AuthorizationStatus.Auth)
                   ? <Link to={`/films/${currentFilm?.id}/review`} className="btn film-card__button">Add review</Link>

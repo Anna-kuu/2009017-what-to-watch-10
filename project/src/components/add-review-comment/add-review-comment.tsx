@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
 
-const RATING_VALUES = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+const MAX_RATING_VALUES = 10;
+const RATING_VALUES = Array.from({ length: MAX_RATING_VALUES }, (it, index) => index + 1).reverse();
 
 export default function AddReviewComment(): JSX.Element {
   const params = useParams();

@@ -1,5 +1,6 @@
 import { useAppDispatch } from '../../hooks';
-import { filmsShownCounter } from '../../store/action';
+import { filmsShownCounter } from '../../store/films-data/films-data';
+
 
 export default function ShowMore(): JSX.Element {
   const dispatch = useAppDispatch();
