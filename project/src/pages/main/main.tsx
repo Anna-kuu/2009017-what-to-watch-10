@@ -3,6 +3,7 @@ import {useAppSelector} from '../../hooks';
 import UserBlock from '../../components/user-block/user-block';
 import { getFilms, getPromoFilm } from '../../store/films-data/selectors';
 import Catalog from '../../components/catalog/catalog';
+import { Link } from 'react-router-dom';
 
 export default function MainScreen(): JSX.Element {
   const films = useAppSelector(getFilms);
@@ -40,12 +41,12 @@ export default function MainScreen(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <Link to={`/player/${promoFilm?.id}`} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
