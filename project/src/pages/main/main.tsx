@@ -1,21 +1,12 @@
 import Logo from '../../components/logo/logo';
-import FilmList from '../../components/film-list/film-list';
-import GenresList from '../../components/genres/genres';
 import {useAppSelector} from '../../hooks';
-import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
-import { getGenresFilm } from '../../utils';
-import { getFilms, getFilmsCounter, getPromoFilm, getSelectedGenre, getFilmsByGenre } from '../../store/films-data/selectors';
+import { getFilms, getPromoFilm } from '../../store/films-data/selectors';
+import Catalog from '../../components/catalog/catalog';
 
 export default function MainScreen(): JSX.Element {
-  //const {filmsByGenre, selectedGenre, filmsCounter, promoFilm, films} = useAppSelector((state) => state);
   const films = useAppSelector(getFilms);
   const promoFilm = useAppSelector(getPromoFilm);
-  const filmsByGenre = useAppSelector(getFilmsByGenre,);
-  const selectedGenre = useAppSelector(getSelectedGenre);
-  const filmsCounter = useAppSelector(getFilmsCounter);
-  const genres = getGenresFilm(films);
-  const shownFilms = filmsByGenre.slice(0, filmsCounter);
   const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
 
   return (
@@ -69,12 +60,7 @@ export default function MainScreen(): JSX.Element {
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList selectedGenre={selectedGenre} genres={genres}/>
-          <FilmList films={shownFilms} />
-          {((filmsByGenre.length - shownFilms.length) > 0) && <ShowMore />}
-        </section>
+        <Catalog />
 
         <footer className="page-footer">
           <div className="logo">

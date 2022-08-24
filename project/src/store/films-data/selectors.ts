@@ -8,4 +8,3 @@ export const getLoadedDataStatus = (state: State): boolean => state[NameSpace.Fi
 
 export const getSelectedGenre = (state: State): string => state[NameSpace.Films].selectedGenre;
 export const getFilmsCounter = (state: State): number => state[NameSpace.Films].filmsCounter;
-export const getFilmsByGenre = (state: State): Films => state[NameSpace.Films].filmsByGenre;

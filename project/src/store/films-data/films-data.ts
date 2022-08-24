@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { FILM_COUNTER_STEP, INITIAL_GENRE, MIN_NUMBER_FILMS, NameSpace } from '../../const';
 import { FilmsData } from '../../types/state';
-import { getFilmsByGenre } from '../../utils';
 import { fetchFilmsAction, fetchPromoFilmAction } from '../api-actions';
 
 const initialState: FilmsData = {
   selectedGenre: INITIAL_GENRE,
   films: [],
   promoFilm: null,
-  filmsByGenre: [],
   isDataLoaded: false,
   filmsCounter: MIN_NUMBER_FILMS,
 };
@@ -19,7 +17,6 @@ export const filmsData = createSlice({
   reducers: {
     changeGenre: (state, action) => {
       state.selectedGenre = action.payload;
-      state.filmsByGenre = getFilmsByGenre(action.payload, state.films);
     },
     filmsShownCounter: (state) => {
       state.filmsCounter += FILM_COUNTER_STEP;
@@ -35,7 +32,6 @@ export const filmsData = createSlice({
       })
       .addCase(fetchFilmsAction.fulfilled, (state, action) => {
         state.films = action.payload;
-        state.filmsByGenre = action.payload;
         state.isDataLoaded = false;
       })
       .addCase(fetchPromoFilmAction.pending, (state) => {

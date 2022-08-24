@@ -15,7 +15,6 @@ export type FilmsData = {
   selectedGenre: string,
   films: Films,
   promoFilm: Film | null,
-  filmsByGenre: Films,
   isDataLoaded: boolean,
   filmsCounter: number,
 };
