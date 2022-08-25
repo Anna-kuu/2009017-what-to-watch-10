@@ -1,5 +1,8 @@
 import { AuthorizationStatus } from './const';
 import { Films } from './types/films';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+dayjs.extend(duration);
 
 const MAX_GENRES = 9;
 
@@ -19,3 +22,5 @@ export function getGenresFilm (films: Films) {
 
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
+
+//export const durationTime = (time: number | undefined) => dayjs.duration(time, 'minutes');
