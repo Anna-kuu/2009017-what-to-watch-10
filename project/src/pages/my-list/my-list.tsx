@@ -1,10 +1,10 @@
 import Logo from '../../components/logo/logo';
 import FilmList from '../../components/film-list/film-list';
 import { useAppSelector } from '../../hooks';
-import { getFilms } from '../../store/films-data/selectors';
+import { getFavoriteFilms} from '../../store/films-data/selectors';
 
 export default function MyList(): JSX.Element {
-  const favoriteFilms = useAppSelector(getFilms).filter((film) => film.isFavorite === true);
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
 
   return (
     <div className="user-page">
@@ -33,7 +33,11 @@ export default function MyList(): JSX.Element {
 
       <footer className="page-footer">
         <div className="logo">
-          {<Logo/>}
+          <a href="main.html" className="logo__link logo__link--light">
+            <span className="logo__letter logo__letter--1">W</span>
+            <span className="logo__letter logo__letter--2">T</span>
+            <span className="logo__letter logo__letter--3">W</span>
+          </a>
         </div>
 
         <div className="copyright">

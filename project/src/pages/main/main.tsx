@@ -1,14 +1,14 @@
 import Logo from '../../components/logo/logo';
 import {useAppSelector} from '../../hooks';
 import UserBlock from '../../components/user-block/user-block';
-import { getFilms, getPromoFilm } from '../../store/films-data/selectors';
+import { getPromoFilm } from '../../store/films-data/selectors';
 import Catalog from '../../components/catalog/catalog';
 import { Link } from 'react-router-dom';
+import MyListButton from '../../components/my-list-button/my-list-button';
 
 export default function MainScreen(): JSX.Element {
-  const films = useAppSelector(getFilms);
   const promoFilm = useAppSelector(getPromoFilm);
-  const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
+
 
   return (
     <>
@@ -47,13 +47,7 @@ export default function MainScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{favoriteFilms}</span>
-                </button>
+                <MyListButton filmId={promoFilm.id} filmStatus={promoFilm.isFavorite}/>
               </div>
             </div>
           </div>

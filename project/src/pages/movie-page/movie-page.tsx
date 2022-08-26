@@ -10,7 +10,7 @@ import { AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
 import { getFilm, getReviews, getSimilarFilms } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getFilms } from '../../store/films-data/selectors';
+import MyListButton from '../../components/my-list-button/my-list-button';
 
 export default function MoviePage(): JSX.Element {
   const params = useParams();
@@ -22,8 +22,6 @@ export default function MoviePage(): JSX.Element {
   const similarFilms = useAppSelector(getSimilarFilms);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const reviews = useAppSelector(getReviews);
-  const films = useAppSelector(getFilms);
-  const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
 
   useEffect(() => {
     if (id === null) {
@@ -74,13 +72,7 @@ export default function MoviePage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{favoriteFilms}</span>
-                </button>
+                <MyListButton filmId={currentFilm.id} filmStatus={currentFilm.isFavorite}/>
                 {(authorizationStatus === AuthorizationStatus.Auth)
                   ? <Link to={`/films/${currentFilm?.id}/review`} className="btn film-card__button">Add review</Link>
                   : ''}

@@ -12,6 +12,7 @@ export default function Player(): JSX.Element {
 
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -43,13 +44,19 @@ export default function Player(): JSX.Element {
       document.exitFullscreen();
     }
   };
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setProgress(videoRef.current.currentTime * 100 / videoRef.current.duration);
+      console.log(progress)
+    }
+  };
 
   if (!currentFilm) {
     return <Navigate to={AppRoute.Root}/>;
   }
   return (
     <div className="player">
-      <video ref={videoRef} src={currentFilm.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
+      <video ref={videoRef} onTimeUpdate={handleTimeUpdate} controls src={currentFilm.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
       <button onClick={()=> navigate(-1)} type="button" className="player__exit">Exit</button>
 
@@ -57,7 +64,7 @@ export default function Player(): JSX.Element {
         <div className="player__controls-row">
           <div className="player__time">
             <progress className="player__progress" value="0" max="100"></progress>
-            <div className="player__toggler" style={{left: '0%'}}>Toggler</div>
+            <div className="player__toggler" style={{left: `${progress}%`}}>Toggler</div>
           </div>
           <div className="player__time-value">1:30:29</div>
         </div>

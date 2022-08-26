@@ -8,7 +8,7 @@ import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { ReviewData } from '../types/review-data';
-
+import { isFavoriteData } from '../types/isFavorite-data';
 
 export const fetchFilmsAction = createAsyncThunk<Films, undefined, {
   dispatch: AppDispatch,
@@ -54,6 +54,31 @@ export const fetchSimilarFilmsAction = createAsyncThunk<Films, number, {
   'data/fetchSimilarFilmsAction',
   async (id, {dispatch, extra: api}) => {
     const {data} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
+    return data;
+  },
+);
+
+export const fetchFavoriteFilmsAction = createAsyncThunk<Films, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/fetchFavoriteFilmsAction',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Films>(APIRoute.FavoriteFilms);
+    return data;
+  },
+);
+
+export const addIsFavoriteAction = createAsyncThunk<Film, isFavoriteData, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/addIsFavoriteAction',
+  async ({id, isFavorite}, {dispatch, extra: api}) => {
+    const {data} = await api.post<Film>(`${APIRoute.FavoriteFilms}/${id}/${isFavorite}`, {id, isFavorite});
+    dispatch(fetchFavoriteFilmsAction());
     return data;
   },
 );

@@ -3,7 +3,8 @@ import { Film, Films } from '../../types/films';
 import { State } from '../../types/state';
 
 export const getFilms = (state: State): Films => state[NameSpace.Films].films;
-export const getPromoFilm = (state: State): Film | null => state[NameSpace.Films].promoFilm;
+export const getPromoFilm = (state: State): Film => state[NameSpace.Films].promoFilm;
+export const getFavoriteFilms = (state: State): Films => state[NameSpace.Films].favoriteFilms;
 export const getLoadedDataStatus = (state: State): boolean => state[NameSpace.Films].isDataLoaded;
 
 export const getSelectedGenre = (state: State): string => state[NameSpace.Films].selectedGenre;

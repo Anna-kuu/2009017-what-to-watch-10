@@ -1,14 +1,12 @@
 import Logo from '../../components/logo/logo';
-import {useParams, Navigate, Link} from 'react-router-dom';
+import { Navigate, Link} from 'react-router-dom';
 import AddReviewComment from '../../components/add-review-comment/add-review-comment';
 import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
-import { getFilms } from '../../store/films-data/selectors';
-
+import { getFilm } from '../../store/film-data/selectors';
 
 export default function AddReview(): JSX.Element {
-  const params = useParams();
-  const currentFilm = useAppSelector(getFilms).find((film) => film.id === Number(params.id));
+  const currentFilm = useAppSelector(getFilm);
 
   if (!currentFilm) {
     return <Navigate to={AppRoute.Root} />;
