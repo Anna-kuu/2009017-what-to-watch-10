@@ -1,9 +1,7 @@
-import { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addIsFavoriteAction} from '../../store/api-actions';
-import { getFilm } from '../../store/film-data/selectors';
 import { getFavoriteFilms } from '../../store/films-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
@@ -17,9 +15,6 @@ export default function MyListButton ({filmId, filmStatus}: MyListButtonProps): 
   const favoriteFilmsLength = useAppSelector(getFavoriteFilms).length;
   const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  //const film = useAppSelector(getFilm);
-  //const idFilm = film.id;
-  //const filmStatus = film.isFavorite;
 
   const handleMyListButtonClick = () => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {
