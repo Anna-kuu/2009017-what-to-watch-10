@@ -25,7 +25,6 @@ export default function Player(): JSX.Element {
       return;
     }
     videoRef.current.addEventListener('loadeddata', () => setIsLoading(false));
-
     if (isPlaying) {
       videoRef.current.play();
       return;
@@ -53,10 +52,13 @@ export default function Player(): JSX.Element {
     return <Navigate to={AppRoute.Root}/>;
   }
 
+
   return (
     <div className="player">
-      <video ref={videoRef} onTimeUpdate={handleTimeUpdate} src={currentFilm.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
+      <video ref={videoRef} onTimeUpdate={handleTimeUpdate} src={currentFilm.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
+      {isLoading &&
+        <SpinnerPlayer />}
       <button onClick={()=> navigate(-1)} type="button" className="player__exit">Exit</button>
 
       <div className="player__controls">

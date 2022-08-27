@@ -1,9 +1,12 @@
-import Spinner from 'react-bootstrap/Spinner';
+import './spinner.css';
 
-export default function SpinnerPlayer() {
+export default function Spinner() {
   return (
-    <Spinner animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>
+    <div className="preloader">
+      <div className="preloader__row">
+        <div className="preloader__item"></div>
+        <div className="preloader__item"></div>
+      </div>
+    </div>
   );
 }
