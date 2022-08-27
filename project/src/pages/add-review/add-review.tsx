@@ -1,14 +1,13 @@
 import Logo from '../../components/logo/logo';
-import {useParams, Navigate, Link} from 'react-router-dom';
+import { Navigate, Link} from 'react-router-dom';
 import AddReviewComment from '../../components/add-review-comment/add-review-comment';
 import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
-import { getFilms } from '../../store/films-data/selectors';
-
+import { getFilm } from '../../store/film-data/selectors';
+import UserBlock from '../../components/user-block/user-block';
 
 export default function AddReview(): JSX.Element {
-  const params = useParams();
-  const currentFilm = useAppSelector(getFilms).find((film) => film.id === Number(params.id));
+  const currentFilm = useAppSelector(getFilm);
 
   if (!currentFilm) {
     return <Navigate to={AppRoute.Root} />;
@@ -39,16 +38,7 @@ export default function AddReview(): JSX.Element {
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href="/" className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
 
         <div className="film-card__poster film-card__poster--small">

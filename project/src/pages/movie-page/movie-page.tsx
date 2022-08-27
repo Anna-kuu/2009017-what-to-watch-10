@@ -10,7 +10,8 @@ import { AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
 import { getFilm, getReviews, getSimilarFilms } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getFilms } from '../../store/films-data/selectors';
+import MyListButton from '../../components/my-list-button/my-list-button';
+import Footer from '../../components/footer/footer';
 
 export default function MoviePage(): JSX.Element {
   const params = useParams();
@@ -19,11 +20,9 @@ export default function MoviePage(): JSX.Element {
   const id = Number(params.id);
 
   const currentFilm = useAppSelector(getFilm);
-  const similarFilms = useAppSelector(getSimilarFilms);
+  const similarFilms = useAppSelector(getSimilarFilms).filter((film) => film.id !== currentFilm.id).slice(0, 5);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const reviews = useAppSelector(getReviews);
-  const films = useAppSelector(getFilms);
-  const favoriteFilms = films.filter((film) => film.isFavorite === true).length;
 
   useEffect(() => {
     if (id === null) {
@@ -74,13 +73,7 @@ export default function MoviePage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{favoriteFilms}</span>
-                </button>
+                <MyListButton filmId={currentFilm.id} filmStatus={currentFilm.isFavorite}/>
                 {(authorizationStatus === AuthorizationStatus.Auth)
                   ? <Link to={`/films/${currentFilm?.id}/review`} className="btn film-card__button">Add review</Link>
                   : ''}
@@ -107,19 +100,7 @@ export default function MoviePage(): JSX.Element {
           <FilmList films={similarFilms} />
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <Link to="/" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

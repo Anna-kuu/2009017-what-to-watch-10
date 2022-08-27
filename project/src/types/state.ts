@@ -14,15 +14,16 @@ export type UserProcess = {
 export type FilmsData = {
   selectedGenre: string,
   films: Films,
-  promoFilm: Film | null,
+  promoFilm: Film,
   isDataLoaded: boolean,
   filmsCounter: number,
+  favoriteFilms: Films,
 };
 
 export type FilmData = {
-  film: Film | null,
+  film: Film,
   similarFilms: Films,
   reviews: Reviews,
   isDataLoaded: boolean,
-  newReview: ReviewData | null,
+  newReview: ReviewData,
 }
