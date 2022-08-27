@@ -15,6 +15,7 @@ type MyListButtonProps = {
 export default function MyListButton ({filmId, filmStatus}: MyListButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const favoriteFilmsLength = useAppSelector(getFavoriteFilms).length;
+  console.log(favoriteFilmsLength)
   const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   //const film = useAppSelector(getFilm);

@@ -11,6 +11,7 @@ import Tabs from '../../components/tabs/tabs';
 import { getFilm, getReviews, getSimilarFilms } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import MyListButton from '../../components/my-list-button/my-list-button';
+import Footer from '../../components/footer/footer';
 
 export default function MoviePage(): JSX.Element {
   const params = useParams();
@@ -19,7 +20,7 @@ export default function MoviePage(): JSX.Element {
   const id = Number(params.id);
 
   const currentFilm = useAppSelector(getFilm);
-  const similarFilms = useAppSelector(getSimilarFilms);
+  const similarFilms = useAppSelector(getSimilarFilms).filter((film) => film.id !== currentFilm.id).slice(0, 5);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const reviews = useAppSelector(getReviews);
 
@@ -99,19 +100,7 @@ export default function MoviePage(): JSX.Element {
           <FilmList films={similarFilms} />
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <Link to="/" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

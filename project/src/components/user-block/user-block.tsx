@@ -6,12 +6,20 @@ import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 export default function UserBlock(): JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const handleLogout = () => {
     dispatch(logoutAction());
   };
+
+  if (authorizationStatus !== AuthorizationStatus.Auth) {
+    return (
+      <div className="user-block">
+        <Link to={'/login'} className="user-block__link">Sign in</Link>
+      </div>
+    );
+  }
 
   return (
     <ul className="user-block">
@@ -21,9 +29,7 @@ export default function UserBlock(): JSX.Element {
         </div>
       </li>
       <li className="user-block__item">
-        {authorizationStatus === AuthorizationStatus.Auth
-          ? <div onClick={handleLogout} className="user-block__link">Sign out</div>
-          : <Link to={'/login'} className="user-block__link">Sign in</Link> }
+        <div onClick={handleLogout} className="user-block__link">Sign out</div>
       </li>
     </ul>
 

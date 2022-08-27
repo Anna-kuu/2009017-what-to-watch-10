@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import {useParams, Navigate, useNavigate} from 'react-router-dom';
+import SpinnerPlayer from '../../components/spinner/spinner';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getFilms } from '../../store/films-data/selectors';
-//import { durationTime } from '../../utils';
+import { durationTime } from '../../utils';
+
 
 export default function Player(): JSX.Element {
   const params = useParams();
@@ -13,6 +15,8 @@ export default function Player(): JSX.Element {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const timeLeftFormat = durationTime(timeLeft);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -22,16 +26,9 @@ export default function Player(): JSX.Element {
     }
     videoRef.current.addEventListener('loadeddata', () => setIsLoading(false));
 
-
     if (isPlaying) {
       videoRef.current.play();
       return;
-    }
-    if (videoRef.current) {
-      console.log(videoRef.current.duration)
-      console.log(videoRef.current.currentTime)
-      console.log(videoRef.current.duration - videoRef.current.currentTime)
-      console.log(videoRef.current.currentTime * 100 / videoRef.current.duration)
     }
 
     videoRef.current.pause();
@@ -44,29 +41,31 @@ export default function Player(): JSX.Element {
       document.exitFullscreen();
     }
   };
+
   const handleTimeUpdate = () => {
     if (videoRef.current) {
       setProgress(videoRef.current.currentTime * 100 / videoRef.current.duration);
-      console.log(progress)
+      setTimeLeft(videoRef.current.duration - videoRef.current.currentTime);
     }
   };
 
   if (!currentFilm) {
     return <Navigate to={AppRoute.Root}/>;
   }
+
   return (
     <div className="player">
-      <video ref={videoRef} onTimeUpdate={handleTimeUpdate} controls src={currentFilm.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
+      <video ref={videoRef} onTimeUpdate={handleTimeUpdate} src={currentFilm.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
       <button onClick={()=> navigate(-1)} type="button" className="player__exit">Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="0" max="100"></progress>
+            <progress className="player__progress" value={progress} max="100"></progress>
             <div className="player__toggler" style={{left: `${progress}%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{timeLeftFormat}</div>
         </div>
 
         <div className="player__controls-row">
@@ -78,7 +77,7 @@ export default function Player(): JSX.Element {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{currentFilm.name}</div>
 
           <button onClick={onToggleFullScreenClick} type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
