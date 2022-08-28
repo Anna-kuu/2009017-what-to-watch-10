@@ -9,6 +9,7 @@ const initialState: FilmData = {
   similarFilms: [],
   reviews: [],
   isDataLoaded: false,
+  isCommentSend: false,
   newReview: {} as Review,
 };
 
@@ -46,12 +47,12 @@ export const filmData = createSlice({
         state.reviews = action.payload;
         state.isDataLoaded = false;
       })
-      .addCase(addIsFavoriteAction.pending, (state, action) => {
-        state.isDataLoaded = true;
+      .addCase(addIsFavoriteAction.pending, (state) => {
+        state.isCommentSend = true;
       })
       .addCase(addIsFavoriteAction.fulfilled, (state, action) => {
         state.film = action.payload;
-        state.isDataLoaded = false;
+        state.isCommentSend = false;
       });
   }
 });

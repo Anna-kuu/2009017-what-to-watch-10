@@ -8,6 +8,9 @@ type OverviewProps = {
 export default function Overview({film}: OverviewProps): JSX.Element{
   const {rating, scoresCount, description, director, starring} = film;
   const ratinglavel = getRating(rating);
+  console.log(starring)
+  //console.log(starring.join())
+  //const starringList = starring.slice(0, 2).join(', ');
   return (
     <>
       <div className="film-rating">

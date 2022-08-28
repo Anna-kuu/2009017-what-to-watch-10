@@ -1,7 +1,10 @@
 import {useState, ChangeEvent, FormEvent, Fragment} from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
+import { APIRoute, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { redirectToRoute } from '../../store/action';
 import { addReviewAction } from '../../store/api-actions';
+import { getIsCommentSend } from '../../store/film-data/selectors';
 
 const MAX_RATING_VALUES = 10;
 const RATING_VALUES = Array.from({ length: MAX_RATING_VALUES }, (it, index) => index + 1).reverse();
@@ -13,6 +16,8 @@ export default function AddReviewComment(): JSX.Element {
   const [rating, setRating] = useState(0);
   const dispatch = useAppDispatch();
   const commentHandleChange = ( evt: ChangeEvent<HTMLTextAreaElement>) => setComment(evt.target.value);
+  const isCommentSend = useAppSelector(getIsCommentSend);
+  const isFotmValid = comment.length >= MIN_REVIEW_LENGTH && comment.length <= MAX_REVIEW_LENGTH && rating;
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -21,6 +26,7 @@ export default function AddReviewComment(): JSX.Element {
       rating: rating,
       id: id,
     }));
+    dispatch(redirectToRoute(`${APIRoute.Films}/${id}`));
   };
 
   const stars = RATING_VALUES.map((index) => (
@@ -40,7 +46,7 @@ export default function AddReviewComment(): JSX.Element {
       <div className="add-review__text">
         <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} onChange={commentHandleChange}></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button disabled={isCommentSend || !isFotmValid} className="add-review__btn" type="submit">Post</button>
         </div>
       </div>
     </form>

@@ -9,6 +9,7 @@ import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { ReviewData } from '../types/review-data';
 import { isFavoriteData } from '../types/isFavorite-data';
+import { database } from 'faker';
 
 export const fetchFilmsAction = createAsyncThunk<Films, undefined, {
   dispatch: AppDispatch,
@@ -101,10 +102,14 @@ export const addReviewAction = createAsyncThunk<Reviews, ReviewData, {
   extra: AxiosInstance
 }>(
   'user/review',
-  async({id, comment, rating}, {dispatch, extra: api}) => {
-    const {data} = await api.post<Reviews>(`${APIRoute.Review}/${id}`, {comment, rating});
-    dispatch(redirectToRoute(`${APIRoute.Films}/${id}`));
-    return data;
+  async({id, comment, rating}, {dispatch, extra: api, rejectWithValue}) => {
+    try {
+      const {data} = await api.post<Reviews>(`${APIRoute.Review}/${id}`, {comment, rating});
+      dispatch(redirectToRoute(`${APIRoute.Films}/${id}`));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   },
 );
 
@@ -119,16 +124,17 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, {
+export const loginAction = createAsyncThunk<UserData, AuthData, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'user/login',
   async({login: email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email,password});
-    saveToken(token);
+    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+    saveToken(data.token);
     dispatch(redirectToRoute(AppRoute.Root));
+    return data;
   },
 );
 

@@ -40,10 +40,7 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
 
 export const durationTime = (timeLeft: number) => {
   const time = dayjs.duration(timeLeft, 'seconds');
-  if (time.hours() > 0) {
-    return time.format('-HH:mm:ss');
-  }
-  return time.format('-mm:ss');
+  return (time.hours() > 0) ? time.format('-HH:mm:ss') : time.format('-mm:ss');
 };
 
 export const dateFormat = (dateReview: string) => {
