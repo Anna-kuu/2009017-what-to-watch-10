@@ -47,3 +47,9 @@ export const dateFormat = (dateReview: string) => {
   const date = dayjs(dateReview).format('MMMM DD, YYYY ');
   return date;
 };
+
+export const getTimeFromMins = (mins: number) => {
+  const hours = Math.trunc(mins / 60);
+  const minutes = mins % 60;
+  return `${hours}h ${minutes}m`;
+};

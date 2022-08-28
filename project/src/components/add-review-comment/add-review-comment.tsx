@@ -1,8 +1,7 @@
 import {useState, ChangeEvent, FormEvent, Fragment} from 'react';
 import { useParams } from 'react-router-dom';
-import { APIRoute, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH } from '../../const';
+import { MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { redirectToRoute } from '../../store/action';
 import { addReviewAction } from '../../store/api-actions';
 import { getIsCommentSend } from '../../store/film-data/selectors';
 
@@ -26,7 +25,6 @@ export default function AddReviewComment(): JSX.Element {
       rating: rating,
       id: id,
     }));
-    dispatch(redirectToRoute(`${APIRoute.Films}/${id}`));
   };
 
   const stars = RATING_VALUES.map((index) => (
@@ -46,7 +44,7 @@ export default function AddReviewComment(): JSX.Element {
       <div className="add-review__text">
         <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} onChange={commentHandleChange}></textarea>
         <div className="add-review__submit">
-          <button disabled={isCommentSend || !isFotmValid} className="add-review__btn" type="submit">Post</button>
+          <button disabled={isCommentSend || !isFotmValid} className="add-review__btn" type="submit">{isCommentSend ? 'Posting...' : 'Post'}</button>
         </div>
       </div>
     </form>

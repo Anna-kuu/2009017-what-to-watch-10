@@ -53,6 +53,9 @@ export const filmData = createSlice({
       .addCase(addIsFavoriteAction.fulfilled, (state, action) => {
         state.film = action.payload;
         state.isCommentSend = false;
+      })
+      .addCase(addIsFavoriteAction.rejected, (state) => {
+        state.isCommentSend = false;
       });
   }
 });
