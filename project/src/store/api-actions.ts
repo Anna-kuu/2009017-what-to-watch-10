@@ -9,7 +9,7 @@ import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { ReviewData } from '../types/review-data';
 import { isFavoriteData } from '../types/isFavorite-data';
-import { database } from 'faker';
+import { toast } from 'react-toastify';
 
 export const fetchFilmsAction = createAsyncThunk<Films, undefined, {
   dispatch: AppDispatch,
@@ -102,13 +102,14 @@ export const addReviewAction = createAsyncThunk<Reviews, ReviewData, {
   extra: AxiosInstance
 }>(
   'user/review',
-  async({id, comment, rating}, {dispatch, extra: api, rejectWithValue}) => {
+  async({id, comment, rating}, {dispatch, extra: api}) => {
     try {
       const {data} = await api.post<Reviews>(`${APIRoute.Review}/${id}`, {comment, rating});
       dispatch(redirectToRoute(`${APIRoute.Films}/${id}`));
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      toast.error('Can\'t send review. Try again later');
+      throw (error);
     }
   },
 );
@@ -131,11 +132,16 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
 }>(
   'user/login',
   async({login: email, password}, {dispatch, extra: api}) => {
-    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(data.token);
-    dispatch(redirectToRoute(AppRoute.Root));
-    return data;
-  },
+    try {
+      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      saveToken(data.token);
+      dispatch(redirectToRoute(AppRoute.Root));
+      return data;
+    } catch (error) {
+      toast.error('Please enter a valid email address. ');
+      throw (error);
+    }
+  }
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, {

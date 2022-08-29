@@ -73,7 +73,7 @@ export default function MoviePage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <MyListButton filmId={currentFilm.id} filmStatus={currentFilm.isFavorite}/>
+                <MyListButton filmId={currentFilm.id} />
                 {(authorizationStatus === AuthorizationStatus.Auth)
                   ? <Link to={`/films/${currentFilm?.id}/review`} className="btn film-card__button">Add review</Link>
                   : ''}

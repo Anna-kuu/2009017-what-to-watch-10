@@ -2,19 +2,20 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addIsFavoriteAction} from '../../store/api-actions';
+import { getFilmStatus } from '../../store/film-data/selectors';
 import { getFavoriteFilms } from '../../store/films-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 type MyListButtonProps = {
-  filmId: number,
-  filmStatus: boolean,
+  filmId: number
 }
 
-export default function MyListButton ({filmId, filmStatus}: MyListButtonProps): JSX.Element {
+export default function MyListButton ({filmId}: MyListButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const favoriteFilmsLength = useAppSelector(getFavoriteFilms).length;
   const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const filmStatus = useAppSelector(getFilmStatus);
 
   const handleMyListButtonClick = () => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {

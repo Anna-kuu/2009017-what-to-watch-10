@@ -10,7 +10,6 @@ import Footer from '../../components/footer/footer';
 export default function MainScreen(): JSX.Element {
   const promoFilm = useAppSelector(getPromoFilm);
 
-
   return (
     <>
       <section className="film-card">
@@ -48,7 +47,7 @@ export default function MainScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <MyListButton filmId={promoFilm.id} filmStatus={promoFilm.isFavorite}/>
+                <MyListButton filmId={promoFilm.id}/>
               </div>
             </div>
           </div>
