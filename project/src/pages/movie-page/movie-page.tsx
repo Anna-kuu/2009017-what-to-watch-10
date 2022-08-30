@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { fetchFilmByIdAction, fetchReviewAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import NotFoundScreen from '../not-found/not-found-screen';
 import UserBlock from '../../components/user-block/user-block';
-import { AuthorizationStatus } from '../../const';
+import { APIRoute, AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
 import { getFilm, getReviews, getSimilarFilms } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
@@ -67,7 +67,7 @@ export default function MoviePage(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`/player/${currentFilm?.id}`}className="btn btn--play film-card__button" type="button">
+                <Link to={`${APIRoute.Player}/${currentFilm?.id}`}className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -75,7 +75,7 @@ export default function MoviePage(): JSX.Element {
                 </Link>
                 <MyListButton filmId={currentFilm.id} />
                 {(authorizationStatus === AuthorizationStatus.Auth)
-                  ? <Link to={`/films/${currentFilm?.id}/review`} className="btn film-card__button">Add review</Link>
+                  ? <Link to={`${APIRoute.Films}/${currentFilm?.id}/review`} className="btn film-card__button">Add review</Link>
                   : ''}
               </div>
             </div>

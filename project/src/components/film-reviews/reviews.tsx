@@ -8,7 +8,7 @@ type ReviewProps = {
 export default function Review({reviews}: ReviewProps): JSX.Element {
 
   const reviewList = reviews.map((review) => (
-    <div key={review.id} className="review">
+    <div key={`review-${review.id}`} className="review">
       <blockquote className="review__quote">
         <p className="review__text">{review.comment}</p>
 

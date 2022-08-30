@@ -28,7 +28,7 @@ export default function AddReviewComment(): JSX.Element {
   };
 
   const stars = RATING_VALUES.map((index) => (
-    <Fragment key={index}>
+    <Fragment key={`star-${index}`}>
       <input className="rating__input" id={`star-${index}`} type="radio" name="rating" value={index} onChange={() => setRating(index)} checked={rating === index}/>
       <label className="rating__label" htmlFor={`star-${index}`}>{`Rating ${index}`}</label>
     </Fragment>

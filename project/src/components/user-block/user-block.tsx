@@ -17,7 +17,7 @@ export default function UserBlock(): JSX.Element {
   if (authorizationStatus !== AuthorizationStatus.Auth) {
     return (
       <div className="user-block">
-        <Link to={'/login'} className="user-block__link">Sign in</Link>
+        <Link to={AppRoute.Login} className="user-block__link">Sign in</Link>
       </div>
     );
   }

@@ -6,6 +6,7 @@ import Catalog from '../../components/catalog/catalog';
 import { Link } from 'react-router-dom';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import Footer from '../../components/footer/footer';
+import { APIRoute } from '../../const';
 
 export default function MainScreen(): JSX.Element {
   const promoFilm = useAppSelector(getPromoFilm);
@@ -41,7 +42,7 @@ export default function MainScreen(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`/player/${promoFilm?.id}`} className="btn btn--play film-card__button" type="button">
+                <Link to={`${APIRoute.Player}/${promoFilm?.id}`} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

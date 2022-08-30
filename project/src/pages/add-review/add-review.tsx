@@ -2,7 +2,7 @@ import Logo from '../../components/logo/logo';
 import { Navigate, Link} from 'react-router-dom';
 import AddReviewComment from '../../components/add-review-comment/add-review-comment';
 import { useAppSelector } from '../../hooks';
-import { AppRoute } from '../../const';
+import { APIRoute, AppRoute } from '../../const';
 import { getFilm } from '../../store/film-data/selectors';
 import UserBlock from '../../components/user-block/user-block';
 
@@ -30,7 +30,7 @@ export default function AddReview(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
+                <Link to={`${APIRoute.Films}/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <div className="breadcrumbs__link">Add review</div>
