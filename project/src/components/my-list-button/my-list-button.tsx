@@ -19,7 +19,7 @@ export default function MyListButton ({filmId}: MyListButtonProps): JSX.Element 
 
   const handleMyListButtonClick = () => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {
-      navigate(AppRoute.Login);
+      return navigate(AppRoute.Login);
     }
     dispatch(addIsFavoriteAction({
       id: filmId,

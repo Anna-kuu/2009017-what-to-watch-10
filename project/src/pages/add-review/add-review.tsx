@@ -1,13 +1,22 @@
 import Logo from '../../components/logo/logo';
-import { Navigate, Link} from 'react-router-dom';
+import { Navigate, Link, useParams} from 'react-router-dom';
 import AddReviewComment from '../../components/add-review-comment/add-review-comment';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { APIRoute, AppRoute } from '../../const';
 import { getFilm } from '../../store/film-data/selectors';
 import UserBlock from '../../components/user-block/user-block';
+import { useEffect } from 'react';
+import { fetchFilmByIdAction } from '../../store/api-actions';
 
 export default function AddReview(): JSX.Element {
   const currentFilm = useAppSelector(getFilm);
+  const dispatch = useAppDispatch();
+  const params = useParams();
+  const id = Number(params.id);
+
+  useEffect(() => {
+    dispatch(fetchFilmByIdAction(id));
+  },[id, dispatch]);
 
   if (!currentFilm) {
     return <Navigate to={AppRoute.Root} />;

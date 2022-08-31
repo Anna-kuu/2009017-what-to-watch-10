@@ -20,7 +20,7 @@ export default function MoviePage(): JSX.Element {
   const id = Number(params.id);
 
   const currentFilm = useAppSelector(getFilm);
-  const similarFilms = useAppSelector(getSimilarFilms).filter((film) => film.id !== currentFilm.id).slice(0, 5);
+  const similarFilms = useAppSelector(getSimilarFilms).filter((film) => film.id !== currentFilm.id).slice(0, 4);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const reviews = useAppSelector(getReviews);
 

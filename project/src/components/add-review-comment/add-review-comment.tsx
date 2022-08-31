@@ -14,7 +14,7 @@ export default function AddReviewComment(): JSX.Element {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
   const dispatch = useAppDispatch();
-  const commentHandleChange = ( evt: ChangeEvent<HTMLTextAreaElement>) => setComment(evt.target.value);
+  const handleCommentChange = ( evt: ChangeEvent<HTMLTextAreaElement>) => setComment(evt.target.value);
   const isCommentSend = useAppSelector(getIsCommentSend);
   const isFotmValid = comment.length >= MIN_REVIEW_LENGTH && comment.length <= MAX_REVIEW_LENGTH && rating;
 
@@ -29,7 +29,7 @@ export default function AddReviewComment(): JSX.Element {
 
   const stars = RATING_VALUES.map((index) => (
     <Fragment key={`star-${index}`}>
-      <input className="rating__input" id={`star-${index}`} type="radio" name="rating" value={index} onChange={() => setRating(index)} checked={rating === index}/>
+      <input disabled={isCommentSend} className="rating__input" id={`star-${index}`} type="radio" name="rating" value={index} onChange={() => setRating(index)} checked={rating === index}/>
       <label className="rating__label" htmlFor={`star-${index}`}>{`Rating ${index}`}</label>
     </Fragment>
   ));
@@ -42,7 +42,7 @@ export default function AddReviewComment(): JSX.Element {
       </div>
 
       <div className="add-review__text">
-        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} onChange={commentHandleChange}></textarea>
+        <textarea disabled={isCommentSend} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} onChange={handleCommentChange}></textarea>
         <div className="add-review__submit">
           <button disabled={isCommentSend || !isFotmValid} className="add-review__btn" type="submit">{isCommentSend ? 'Posting...' : 'Post'}</button>
         </div>
