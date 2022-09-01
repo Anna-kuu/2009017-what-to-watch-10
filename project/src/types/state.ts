@@ -18,7 +18,6 @@ export type FilmsData = {
   promoFilm: Film,
   isDataLoaded: boolean,
   filmsCounter: number,
-  favoriteFilms: Films,
 };
 
 export type FilmData = {
@@ -28,4 +27,5 @@ export type FilmData = {
   isDataLoaded: boolean,
   isCommentSend: boolean,
   newReview: ReviewData,
+  favoriteFilms: Films,
 }

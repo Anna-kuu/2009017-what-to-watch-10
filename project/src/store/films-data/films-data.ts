@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { FILM_COUNTER_STEP, INITIAL_GENRE, MIN_NUMBER_FILMS, NameSpace } from '../../const';
 import { Film } from '../../types/films';
 import { FilmsData } from '../../types/state';
-import { fetchFavoriteFilmsAction, fetchFilmsAction, fetchPromoFilmAction } from '../api-actions';
+import { fetchFilmsAction, fetchPromoFilmAction } from '../api-actions';
 
 const initialState: FilmsData = {
   selectedGenre: INITIAL_GENRE,
@@ -10,7 +10,6 @@ const initialState: FilmsData = {
   promoFilm: {} as Film,
   isDataLoaded: false,
   filmsCounter: MIN_NUMBER_FILMS,
-  favoriteFilms: [],
 };
 
 export const filmsData = createSlice({
@@ -41,13 +40,6 @@ export const filmsData = createSlice({
       })
       .addCase(fetchPromoFilmAction.fulfilled, (state, action) => {
         state.promoFilm = action.payload;
-        state.isDataLoaded = false;
-      })
-      .addCase(fetchFavoriteFilmsAction.pending, (state) => {
-        state.isDataLoaded = true;
-      })
-      .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
-        state.favoriteFilms = action.payload;
         state.isDataLoaded = false;
       });
   }

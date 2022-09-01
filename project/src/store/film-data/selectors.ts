@@ -8,3 +8,5 @@ export const getReviews = (state: State): Reviews => state[NameSpace.Film].revie
 export const getLoadedDataStatus = (state: State): boolean => state[NameSpace.Film].isDataLoaded;
 export const getIsCommentSend = (state: State): boolean => state[NameSpace.Film].isCommentSend;
 export const getFilmStatus = (state: State): boolean => state[NameSpace.Film].film.isFavorite;
+
+export const getFavoriteFilms = (state: State): Films => state[NameSpace.Film].favoriteFilms;

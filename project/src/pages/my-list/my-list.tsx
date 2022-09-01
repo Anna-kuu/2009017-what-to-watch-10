@@ -1,9 +1,9 @@
 import Logo from '../../components/logo/logo';
 import FilmList from '../../components/film-list/film-list';
 import { useAppSelector } from '../../hooks';
-import { getFavoriteFilms} from '../../store/films-data/selectors';
 import Footer from '../../components/footer/footer';
 import UserBlock from '../../components/user-block/user-block';
+import { getFavoriteFilms } from '../../store/film-data/selectors';
 
 export default function MyList(): JSX.Element {
   const favoriteFilms = useAppSelector(getFavoriteFilms);

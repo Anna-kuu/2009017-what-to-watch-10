@@ -2,8 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addIsFavoriteAction} from '../../store/api-actions';
-import { getFilmStatus } from '../../store/film-data/selectors';
-import { getFavoriteFilms } from '../../store/films-data/selectors';
+import { getFavoriteFilms, getFilmStatus } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 type MyListButtonProps = {
