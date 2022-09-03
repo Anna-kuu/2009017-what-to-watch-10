@@ -11,7 +11,7 @@ import Player from '../../pages/player/player';
 import Login from '../../pages/sign-in/login';
 import { isCheckedAuth } from '../../utils';
 import HistoryRouter from '../history-route/history-route';
-import { browserHistory } from '../../browser-history';
+import browserHistory from '../../browser-history';
 import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
 import { getLoadedDataStatus } from '../../store/films-data/selectors';
