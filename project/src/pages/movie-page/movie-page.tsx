@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { fetchFilmByIdAction, fetchReviewAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import NotFoundScreen from '../not-found/not-found-screen';
 import UserBlock from '../../components/user-block/user-block';
-import { APIRoute, AuthorizationStatus } from '../../const';
+import { APIRoute, AuthorizationStatus, MAX_NUMBER_SIMILAR_FILMS } from '../../const';
 import Tabs from '../../components/tabs/tabs';
 import { getFilm, getReviews, getSimilarFilms } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
@@ -20,7 +20,7 @@ export default function MoviePage(): JSX.Element {
   const id = Number(params.id);
 
   const currentFilm = useAppSelector(getFilm);
-  const similarFilms = useAppSelector(getSimilarFilms).filter((film) => film.id !== currentFilm.id).slice(0, 4);
+  const similarFilms = useAppSelector(getSimilarFilms).filter((film) => film.id !== currentFilm.id).slice(0, MAX_NUMBER_SIMILAR_FILMS);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const reviews = useAppSelector(getReviews);
 

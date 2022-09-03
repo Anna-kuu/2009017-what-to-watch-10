@@ -1,5 +1,5 @@
 import { Reviews } from '../../types/films';
-import { dateFormat } from '../../utils';
+import { convertDateFormat } from '../../utils';
 
 type ReviewProps = {
   reviews: Reviews,
@@ -15,7 +15,7 @@ export default function Review({reviews}: ReviewProps): JSX.Element {
 
         <footer className="review__details">
           <cite className="review__author">{review.user.name}</cite>
-          <time className="review__date" dateTime="2016-12-24">{dateFormat(review.date)}</time>
+          <time className="review__date" dateTime="2016-12-24">{convertDateFormat(review.date)}</time>
         </footer>
       </blockquote>
 

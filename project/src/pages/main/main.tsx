@@ -10,7 +10,6 @@ import { APIRoute } from '../../const';
 
 export default function MainScreen(): JSX.Element {
   const promoFilm = useAppSelector(getPromoFilm);
-
   return (
     <>
       <section className="film-card">

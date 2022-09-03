@@ -1,7 +1,6 @@
 import { AuthorizationStatus } from '../const.js';
 import {store} from '../store/index.js';
 import { Film, Films, Reviews } from './films.js';
-import { ReviewData } from './review-data.js';
 
 export type State = ReturnType<typeof store.getState>;
 
@@ -26,6 +25,5 @@ export type FilmData = {
   reviews: Reviews,
   isDataLoaded: boolean,
   isCommentSend: boolean,
-  newReview: ReviewData,
   favoriteFilms: Films,
 }

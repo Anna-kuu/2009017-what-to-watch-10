@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { Film, Review } from '../../types/films';
+import { Film } from '../../types/films';
 import { FilmData } from '../../types/state';
 import { addIsFavoriteAction, addReviewAction, fetchFavoriteFilmsAction, fetchFilmByIdAction, fetchReviewAction, fetchSimilarFilmsAction } from '../api-actions';
 
@@ -10,7 +10,6 @@ const initialState: FilmData = {
   reviews: [],
   isDataLoaded: false,
   isCommentSend: false,
-  newReview: {} as Review,
   favoriteFilms: [],
 };
 

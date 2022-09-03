@@ -1,8 +1,12 @@
 export const MIN_NUMBER_FILMS = 8;
 export const FILM_COUNTER_STEP = 8;
 export const INITIAL_GENRE = 'All genres';
-export const MIN_REVIEW_LENGTH = 50;
-export const MAX_REVIEW_LENGTH = 400;
+export const MAX_NUMBER_SIMILAR_FILMS = 4;
+
+export enum ReviewLength {
+  Min = 50,
+  Max = 400,
+}
 
 export enum AppRoute {
   Root = '/',

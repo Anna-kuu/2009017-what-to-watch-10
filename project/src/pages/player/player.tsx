@@ -4,7 +4,7 @@ import SpinnerPlayer from '../../components/spinner/spinner';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getFilms } from '../../store/films-data/selectors';
-import { durationTime } from '../../utils';
+import { getDurationTime } from '../../utils';
 
 
 export default function Player(): JSX.Element {
@@ -16,7 +16,7 @@ export default function Player(): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
-  const timeLeftFormat = durationTime(timeLeft);
+  const timeLeftFormat = getDurationTime(timeLeft);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 

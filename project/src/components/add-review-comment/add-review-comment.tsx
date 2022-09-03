@@ -1,6 +1,6 @@
 import {useState, ChangeEvent, FormEvent, Fragment} from 'react';
 import { useParams } from 'react-router-dom';
-import { MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH } from '../../const';
+import { ReviewLength } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
 import { getIsCommentSend } from '../../store/film-data/selectors';
@@ -16,7 +16,7 @@ export default function AddReviewComment(): JSX.Element {
   const dispatch = useAppDispatch();
   const handleCommentChange = ( evt: ChangeEvent<HTMLTextAreaElement>) => setComment(evt.target.value);
   const isCommentSend = useAppSelector(getIsCommentSend);
-  const isFotmValid = comment.length >= MIN_REVIEW_LENGTH && comment.length <= MAX_REVIEW_LENGTH && rating;
+  const isFotmValid = comment.length >= ReviewLength.Min && comment.length <= ReviewLength.Max && rating;
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -42,7 +42,7 @@ export default function AddReviewComment(): JSX.Element {
       </div>
 
       <div className="add-review__text">
-        <textarea disabled={isCommentSend} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} onChange={handleCommentChange}></textarea>
+        <textarea maxLength={400} disabled={isCommentSend} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} onChange={handleCommentChange}></textarea>
         <div className="add-review__submit">
           <button disabled={isCommentSend || !isFotmValid} className="add-review__btn" type="submit">{isCommentSend ? 'Posting...' : 'Post'}</button>
         </div>

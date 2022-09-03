@@ -38,12 +38,12 @@ export function getGenresFilm (films: Films) {
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-export const durationTime = (timeLeft: number) => {
+export const getDurationTime = (timeLeft: number) => {
   const time = dayjs.duration(timeLeft, 'seconds');
   return (time.hours() > 0) ? time.format('-HH:mm:ss') : time.format('-mm:ss');
 };
 
-export const dateFormat = (dateReview: string) => {
+export const convertDateFormat = (dateReview: string) => {
   const date = dayjs(dateReview).format('MMMM DD, YYYY ');
   return date;
 };
