@@ -1,12 +1,14 @@
 import { Reviews } from '../../types/films';
 import { convertDateFormat } from '../../utils';
 
+const COUNT_COLUMNS = 2;
+
 type ReviewProps = {
   reviews: Reviews,
 }
 
 export default function Review({reviews}: ReviewProps): JSX.Element {
-  const countHalfReviews = Math.ceil(reviews.length / 2);
+  const countHalfReviews = Math.ceil(reviews.length / COUNT_COLUMNS);
 
   const reviewList = (comments: Reviews) => comments.map((review) => (
     <div key={`review-${review.id}`} className="review">
